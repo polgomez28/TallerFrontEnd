@@ -36,3 +36,29 @@
     transform: rotate(360deg);
   }
 }
+
+h1{
+  background-color: rgb(28, 114, 85);
+  color:whitesmoke;
+  padding: 20px;
+}
+
+h2{
+  color:rgb(28, 114, 85);
+}
+
+input, button{
+  padding:5px;
+  margin: 10px;
+  border-radius: 5px;
+  border: solid 1px rgb(28, 114, 85);
+}
+
+button{
+  background-color: rgb(28, 114, 85);
+  color:whitesmoke;
+}
+
+input::placeholder{
+  color: rgb(28, 114, 85);
+}
