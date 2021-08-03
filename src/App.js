@@ -10,6 +10,21 @@ import './App.css';
 function App() {
   return (
     <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Obligatorio React<code>src/App.js</code>
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          
+        </a>
+      </header>
+
       <Switch>
 
         <Route exact path="/" component={Home}></Route>
@@ -18,6 +33,7 @@ function App() {
         <Route path="/Login" component={Login}></Route>
         <Route component={NotFound}></Route>
       </Switch>
+
     </div>
   );
 }
