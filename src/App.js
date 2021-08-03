@@ -1,4 +1,10 @@
-import logo from './logo.svg';
+import { Route, Switch } from 'react-router-dom';
+//import { Router } from 'workbox-routing';
+import Home from './componentes/Home';
+import About from './componentes/About';
+import User from './componentes/User';
+import Login from './componentes/Login';
+import NotFound from './componentes/NotFound';
 import './App.css';
 
 function App() {
@@ -15,9 +21,19 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          
         </a>
       </header>
+
+      <Switch>
+
+        <Route exact path="/" component={Home}></Route>
+        <Route path="/About" component={About}></Route>
+        <Route path="/User" component={User}></Route>
+        <Route path="/Login" component={Login}></Route>
+        <Route component={NotFound}></Route>
+      </Switch>
+
     </div>
   );
 }
