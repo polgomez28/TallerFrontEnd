@@ -5,25 +5,13 @@ import About from './componentes/About';
 import User from './componentes/User';
 import Login from './componentes/Login';
 import NotFound from './componentes/NotFound';
+import Ventas from './componentes/Ventas';
+import Destinos from './componentes/Destinos';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Obligatorio React<code>src/App.js</code>
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          
-        </a>
-      </header>
 
       <Switch>
 
@@ -31,6 +19,8 @@ function App() {
         <Route path="/About" component={About}></Route>
         <Route path="/User/:nombreUsuario" component={User}></Route>
         <Route path="/Login" component={Login}></Route>
+        <Route path="/Ventas" component={Ventas}></Route>
+        <Route path="/Destinos" component={Destinos}></Route>
         <Route component={NotFound}></Route>
       </Switch>
 
