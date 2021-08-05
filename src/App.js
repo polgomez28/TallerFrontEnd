@@ -1,5 +1,5 @@
 import { Route, Switch } from 'react-router-dom';
-//import { Router } from 'workbox-routing';
+import { Router } from 'workbox-routing';
 import Home from './componentes/Home';
 import About from './componentes/About';
 import User from './componentes/User';
