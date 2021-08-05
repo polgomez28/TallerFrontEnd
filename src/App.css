@@ -48,19 +48,30 @@ h2, h3{
   padding:20px;
 }
 
-input, button, select{
+.input, .btn, select{
   padding:5px;
   margin: 10px;
   border-radius: 5px;
   border: solid 1px rgb(28, 114, 85);
 }
 
-button{
+.btn{
   background-color: rgb(28, 114, 85);
   color:whitesmoke;
+  font-weight: bold;
+  width: 45%;
+  display: felx;
+  justify-content: space-around;
 }
 
-input::placeholder, select::placeholder, select{
+.btn:hover{
+  background-color: whitesmoke;
+  color:rgb(28, 114, 85);
+  border: solid 2px rgb(28, 114, 85);
+  margin:10px;
+}
+
+.input::placeholder, select::placeholder, select{
   color: rgb(28, 114, 85);
 }
 
@@ -70,7 +81,7 @@ form{
   margin: 0 auto;
 }
 
-input, select, button{
+.input, select, button{
   width: 100%;
 }
 
