@@ -43,11 +43,12 @@ h1{
   padding: 20px;
 }
 
-h2{
+h2, h3{
   color:rgb(28, 114, 85);
+  padding:20px;
 }
 
-input, button{
+input, button, select{
   padding:5px;
   margin: 10px;
   border-radius: 5px;
@@ -59,6 +60,38 @@ button{
   color:whitesmoke;
 }
 
-input::placeholder{
+input::placeholder, select::placeholder, select{
   color: rgb(28, 114, 85);
+}
+
+form{
+  width: 30%;
+  text-align: center;
+  margin: 0 auto;
+}
+
+input, select, button{
+  width: 100%;
+}
+
+.destinos{
+  width: 80%;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.destinos button{
+  width: 5%;
+  text-align: center;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;  
+}
+
+.link{
+  color: rgb(28, 114, 85);
+  position: fixed;
+  top: 100px;
+  left: 10px; 
+  padding: 10px;
 }
