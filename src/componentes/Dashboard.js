@@ -1,5 +1,6 @@
 import { useHistory } from "react-router-dom";
 import { useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Alert, Button, Form } from "react-bootstrap";
 
 const Dashboard = () => {
@@ -7,11 +8,58 @@ const Dashboard = () => {
     const history = useHistory();
 
     const usuarioRef = useRef(null);
+    const paqueteRef = useRef(null);
     const adultosRef = useRef(0);
     const menoresRef = useRef(0);
 
-    const comprar = () => {
+    const dispatch = useDispatch();
+
+    const [error, setError] = useState('');
+
+
+    const comprar = async () => {
         console.log("presionando Realizar compra")
+
+        const usuario = usuarioRef.current.value;
+        const paquete = paqueteRef.current.value;
+        const adultos = adultosRef.current.value;
+        const menores = menoresRef.current.value;
+
+        if(usuario.length === 0 || paquete.length === 0 || adultos.length === 0 || menores.length === 0 ){
+            setError('Debe completar todos los campos.');
+            return;
+        }
+
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+            usuario: usuario,
+            paquete: paquete,
+            adultos: adultos,
+            menores: menores,
+        });
+
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+
+        const response = await fetch("https://destinos.develotion.com//ventas.php", requestOptions)
+
+        const resultado = await response.json();
+
+        if(resultado.token){
+            console.log("--------->", resultado);
+
+            dispatch({type: 'AGREGAR_VENTA', payload: resultado.token});
+            setError('');
+        }
+        else{
+            setError(resultado.mensaje);
+        }
     }
 
     return (<div className="dashboard">
@@ -22,7 +70,7 @@ const Dashboard = () => {
                 <Form.Group >
                     <Form.Control className="input" type="text" placeholder="Nombre Cliente" ref={usuarioRef} />
 
-                    <Form.Select className="select">
+                    <Form.Select className="select" ref={paqueteRef}>
                         <option value="1">One</option>
                         <option value="2">Two</option>
                         <option value="3">Three</option>
@@ -38,7 +86,7 @@ const Dashboard = () => {
                     Realizar Compra
                 </Button>
 
-                {/* {error && <Alert variant="danger">{error}</Alert>} */}
+                 {error && <Alert variant="danger">{error}</Alert>} 
 
             </Form>
         </section>
