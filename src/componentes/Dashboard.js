@@ -1,13 +1,13 @@
 import { useHistory } from "react-router-dom";
 import { useRef, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch} from "react-redux";
 import { Alert, Button, Form } from "react-bootstrap";
 
 const Dashboard = () => {
 
     const history = useHistory();
 
-    const usuarioRef = useRef(null);
+    const clienteRef = useRef(null);
     const paqueteRef = useRef(null);
     const adultosRef = useRef(0);
     const menoresRef = useRef(0);
@@ -20,12 +20,14 @@ const Dashboard = () => {
     const comprar = async () => {
         console.log("presionando Realizar compra")
 
-        const usuario = usuarioRef.current.value;
-        const paquete = paqueteRef.current.value;
-        const adultos = adultosRef.current.value;
-        const menores = menoresRef.current.value;
+       // const token = useSelector((state) => state.authReducer)
 
-        if(usuario.length === 0 || paquete.length === 0 || adultos.length === 0 || menores.length === 0 ){
+        const nombreCliente = clienteRef.current.value;
+        const idPaquete = paqueteRef.current.value;
+        const cantidadMayores = adultosRef.current.value;
+        const cantidadMenores = menoresRef.current.value;
+
+        if(nombreCliente.length === 0 || idPaquete.length === 0 || cantidadMayores.length === 0 || cantidadMenores.length === 0 ){
             setError('Debe completar todos los campos.');
             return;
         }
@@ -34,10 +36,10 @@ const Dashboard = () => {
         myHeaders.append("Content-Type", "application/json");
 
         var raw = JSON.stringify({
-            usuario: usuario,
-            paquete: paquete,
-            adultos: adultos,
-            menores: menores,
+            nombreCliente: nombreCliente,
+            idPaquete: idPaquete,
+            cantidadMayores: cantidadMayores,
+            cantidadMenores: cantidadMenores,
         });
 
         var requestOptions = {
@@ -68,7 +70,7 @@ const Dashboard = () => {
             <h2>Venta de Paquetes</h2>
             <Form>
                 <Form.Group >
-                    <Form.Control className="input" type="text" placeholder="Nombre Cliente" ref={usuarioRef} />
+                    <Form.Control className="input" type="text" placeholder="Nombre Cliente" ref={clienteRef} required/>
 
                     <Form.Select className="select" ref={paqueteRef}>
                         <option value="1">One</option>
@@ -106,7 +108,7 @@ const Dashboard = () => {
 
             <h2>Destinos </h2>
             <h3>Destinos Top</h3>
-            <h3>Destinos a Promocionar</h3>
+            <h3>Destinos a Promocionar</h3> 
 
 
         </section>

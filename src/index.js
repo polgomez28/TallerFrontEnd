@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App';
 import './index.css';
 import loginReducer from './redux/loginReducer';
+import ventasReducer from './redux/ventasReducer';
 
 
 import { createStore, combineReducers } from 'redux';
@@ -14,6 +15,7 @@ import { Provider } from 'react-redux';
 
 const rootReducer = combineReducers({
     loginReducer: loginReducer,
+    ventasReducer: ventasReducer,
 });
   
   const store = createStore(
