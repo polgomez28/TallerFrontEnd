@@ -1,10 +1,11 @@
 const initialState = {};
+//const initialState = {token:'', usuario: ''};
 
 const loginReducer = (state = initialState, action) => {
     switch(action.type){
         case 'LOGIN':
-            console.log("--->, action" , action )
-            return state;
+            const newState = {...state, token: action.payload};
+            return newState;   
         default:
             return state;    
     }
