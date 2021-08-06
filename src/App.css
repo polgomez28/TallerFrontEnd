@@ -48,7 +48,15 @@ h2, h3{
   padding:20px;
 }
 
-.input, .btn, select{
+h2{
+  font-size: 26px;
+}
+
+h3{
+  font-size: 20px;
+}
+
+.input, .btn, .select{
   padding:5px;
   margin: 10px;
   border-radius: 5px;
@@ -71,7 +79,7 @@ h2, h3{
   margin:10px;
 }
 
-.input::placeholder, select::placeholder, select{
+.input::placeholder, .select::placeholder, .select{
   color: rgb(28, 114, 85);
 }
 
@@ -81,17 +89,17 @@ form{
   margin: 0 auto;
 }
 
-.input, select, button{
+.input, .select, button{
   width: 100%;
 }
 
-.destinos{
+.dashboard{
   width: 80%;
   text-align: center;
   margin: 0 auto;
 }
 
-.destinos button{
+#volver{
   width: 5%;
   text-align: center;
   position: fixed;
