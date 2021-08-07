@@ -29,6 +29,10 @@ const Dashboard = () => {
             setError('Debe completar todos los campos.');
             return;
         }
+        if (cantidadMayores + cantidadMenores > 10) {
+            setError('Los paquetes son para un máximo de 10 personas.');
+            return;
+        }
 
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
@@ -108,6 +112,12 @@ const Dashboard = () => {
                         <option value="1">One</option>
                         <option value="2">Two</option>
                         <option value="3">Three</option>
+
+                        {/* {paquetes.map((destinos) => (
+                            <option value={destinos.id}> {destinos.nombre} </option>
+                        ))} */}
+
+
                     </Form.Select>
 
                     <Form.Control className="input" type="number" placeholder="Cantidad Adultos" ref={adultosRef} />
@@ -128,35 +138,43 @@ const Dashboard = () => {
             <h2>Listado de Paquetes</h2>
 
             <Card style={{ width: '18rem' }}>
-                    <Card.Img variant="top" src="holder.js/100px180" />
-                    <Card.Body>
-                        <Card.Title>Paquete</Card.Title>
-                        <ListGroup className="list-group-flush">
-                            <ListGroupItem> Cliente: </ListGroupItem>
-                            <ListGroupItem>  Adultos</ListGroupItem>
-                            <ListGroupItem>  Niños</ListGroupItem>
-                            <ListGroupItem> Precio Final: </ListGroupItem>
-                        </ListGroup>
-                    </Card.Body>
-                </Card>
+                <Card.Img variant="top" src="holder.js/100px180" />
+                <Card.Body>
+                    <Card.Title>Paquete</Card.Title>
+                    <ListGroup className="list-group-flush">
+                        <ListGroupItem> Cliente: </ListGroupItem>
+                        <ListGroupItem>  Adultos</ListGroupItem>
+                        <ListGroupItem>  Niños</ListGroupItem>
+                        <ListGroupItem> Precio Final: </ListGroupItem>
+                    </ListGroup>
+                </Card.Body>
+            </Card>
 
             {/*             
-            {paquetes.map((ventas) =>
+            {ventas.map((venta) =>
 
                 <Card style={{ width: '18rem' }}>
                     <Card.Img variant="top" src="holder.js/100px180" />
                     <Card.Body>
-                        <Card.Title>{ventas.idPaquete}</Card.Title>
+                        <Card.Title>{venta.idPaquete}</Card.Title>
                         <ListGroup className="list-group-flush">
-                            <ListGroupItem> Cliente: {ventas.nombreCliente}</ListGroupItem>
-                            <ListGroupItem> {ventas.cantidadMayores} Adultos</ListGroupItem>
-                            <ListGroupItem> {ventas.cantidadMenores} Niños</ListGroupItem>
-                            <ListGroupItem> Precio Final: </ListGroupItem>
+                            <ListGroupItem> Cliente: {venta.nombreCliente}</ListGroupItem>
+                            <ListGroupItem> {venta.cantidadMayores} Adultos</ListGroupItem>
+                            <ListGroupItem> {venta.cantidadMenores} Niños</ListGroupItem>
+                            <ListGroupItem> Precio Final: {total} </ListGroupItem>
                         </ListGroup>
                     </Card.Body>
                 </Card>
 
             )}; */}
+
+            {/* const total =  totalMayores + totalMenores
+            
+                const totalMayores = {venta.cantidadMayores}*destino.precio_mayor
+                const totalMenores = {venta.cantidadMenores}*destino.precio_menor
+            */}
+
+
 
         </section>
         <section>
