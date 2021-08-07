@@ -32,6 +32,10 @@ const Dashboard = () => {
             setError('Debe completar todos los campos.');
             return;
         }
+        if(cantidadMayores+cantidadMenores>10){
+            setError('Los paquetes son para un máximo de 10 personas.');
+            return;
+        }
 
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
