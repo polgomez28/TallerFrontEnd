@@ -83,9 +83,6 @@ const Dashboard = () => {
 
     const cargarPaquetes = async () => {
 
-        //const response = await fetch("https://destinos.develotion.com//ventas.php?idVendedor=4")
-
-
         const response = await fetch('https://destinos.develotion.com/paquetes.php', {
             method: 'GET',
             headers: {
@@ -95,18 +92,15 @@ const Dashboard = () => {
             }
         });
 
-
-
-        // destinos = response.destinos;
-        // console.log("R====>",destinos);
-
-
         if (response.error) {
             setError('Ocurrió un error');
             return;
           }
       
           dispatch({ type: 'CARGAR_PAQUETES', payload: response }); 
+          if(response){
+              
+          }
           console.log("destinos al state ---->",response);
       
           setError('');
