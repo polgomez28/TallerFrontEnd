@@ -43,6 +43,8 @@ const Login = () => {
 
         const resultado = await response.json();
 
+        console.log(resultado);
+
         if(resultado.apiKey){
             console.log("--------->", resultado);
 
@@ -99,6 +101,7 @@ const Login = () => {
                 <Button variant="primary" onClick={login} className="btn">
                     Ingresar
                 </Button>
+                
                 <Button variant="primary" onClick={registro} className="btn">
                     Registrarme
                 </Button>

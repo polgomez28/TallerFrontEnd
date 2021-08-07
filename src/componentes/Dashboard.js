@@ -1,30 +1,27 @@
 import { useHistory } from "react-router-dom";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Alert, Button, Card, Form, ListGroup, ListGroupItem } from "react-bootstrap";
-import { useEffect } from "react";
+
 
 const Dashboard = () => {
-
     const history = useHistory();
-
     const clienteRef = useRef(null);
     const paqueteRef = useRef(null);
     const adultosRef = useRef(0);
     const menoresRef = useRef(0);
+    
+    const token = useSelector((state) => state.loginReducer);
 
     //const destinos = useSelector((state) => state.ventasReducer)
     
     
     const dispatch = useDispatch();
-
     const [error, setError] = useState('');
-
-
+    
+    
     const comprar = async () => {
         console.log("presionando Realizar compra")
-
-        // const token = useSelector((state) => state.authReducer)
 
         const nombreCliente = clienteRef.current.value;
         const idPaquete = paqueteRef.current.value;
@@ -56,8 +53,8 @@ const Dashboard = () => {
             body: raw,
             redirect: 'follow'
         };
-
-        const response = await fetch("https://destinos.develotion.com//ventas.php", requestOptions)
+        
+        const response = await fetch("https://destinos.develotion.com/ventas.php", requestOptions)
 
         const resultado = await response.json();
 
@@ -74,18 +71,42 @@ const Dashboard = () => {
     }
 
     const paquetes = useSelector((state) => state.ventasReducer);
+
     useEffect(() => {
         cargarPaquetes();
     }, []);
 
     const cargarPaquetes = async () => {
+
+        let destinos = [];
+        console.log("token antes de hacer fetch",token.apikey);
+
         const response = await fetch("https://destinos.develotion.com//ventas.php?idVendedor=4")
 
-        const ventas = await response.json();
 
-        dispatch({ type: 'CARGAR_VENTAS', payload: ventas.data })
+
+        const response = await fetch('https://destinos.develotion.com/paquetes.php', {
+            method: 'GET',
+            headers: {
+            Accept: 'application/json',
+            'apikey': token.apikey,
+            'Content-Type': 'application/json'
+            }
+        });
+        destinos = response.destinos;
+        console.log("R====>",destinos);
+
+        if (response.error) {
+            setError('Ocurrió un error');
+            return;
+          }
+      
+          dispatch({ type: 'CARGAR_PAQUETES', payload: destinos }); 
+          console.log("destinos al state ---->",destinos);
+      
+          setError('');
+    
     }
-
     return (<div className="dashboard">
 
         <section>
