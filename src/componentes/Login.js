@@ -85,6 +85,7 @@ const Login = () => {
 
       setError('');
 
+      history.push('/Dashboard');
     }
 
     return (
