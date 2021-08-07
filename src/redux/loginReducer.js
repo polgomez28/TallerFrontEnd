@@ -1,5 +1,4 @@
 const initialState = {};
-//const initialState = {token:'', usuario: ''};
 
 const loginReducer = (state = initialState, action) => {
     switch(action.type){

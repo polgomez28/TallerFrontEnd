@@ -40,10 +40,10 @@ const Login = () => {
 
         const resultado = await response.json();
 
-        if(resultado.token){
+        if(resultado.apiKey){
             console.log("--------->", resultado);
 
-            dispatch({type: 'LOGIN', payload: resultado.token});
+            dispatch({type: 'LOGIN', payload: resultado.apiKey});
             setError('');
         }
         else{
@@ -51,8 +51,34 @@ const Login = () => {
         }
     }
 
-    const registro = () => {
-        console.log("presionando registrarme")
+    const registro = async () => {
+        
+        const usuario = usuarioRef.current.value;
+        const password = passwordRef.current.value;
+
+        const response = await fetch('https://destinos.develotion.com/usuarios.php', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          usuario,
+          password,
+        }),
+      });
+
+      const data = await response.json();
+      
+      if(data.error){
+          setError('Error de registro');
+          return;
+      }
+
+      dispatch({ type: 'LOGIN', payload: data.apiKey });
+
+      setError('');
+
     }
 
     return (
