@@ -90,16 +90,16 @@ const Dashboard = () => {
             'Content-Type': 'application/json'
             }
         });
-        // destinos = response.destinos;
-        // console.log("R====>",destinos);
+        
+        const destino = await response.json();
 
         if (response.error) {
             setError('Ocurrió un error');
             return;
           }
       
-          dispatch({ type: 'CARGAR_PAQUETES', payload: response }); 
-          console.log("destinos al state ---->",response);
+          dispatch({ type: 'CARGAR_PAQUETES', payload: destino.destinos }); 
+          console.log("destinos al state ---->",destino.destinos);
       
           setError('');
     
