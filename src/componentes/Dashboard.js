@@ -96,8 +96,8 @@ const Dashboard = () => {
                         <option value="2">Two</option>
                         <option value="3">Three</option>
 
-                        {/* {paquetes.map((paquete) => (
-                            <option value={paquete.id}> {destinos.nombre} </option>
+                        {/* {paquetes.map((destinos) => (
+                            <option value={destinos.id}> {destinos.nombre} </option>
                         ))} */}
 
 
