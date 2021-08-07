@@ -1,9 +1,9 @@
+import './App.css';
 import { Route, Switch } from 'react-router-dom';
 
 import Login from './componentes/Login';
 import Dashboard from './componentes/Dashboard';
 import NotFound from './componentes/NotFound';
-import './App.css';
 
 function App() {
   return (

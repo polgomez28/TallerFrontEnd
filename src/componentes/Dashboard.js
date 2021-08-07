@@ -1,7 +1,7 @@
 import { useHistory } from "react-router-dom";
 import { useRef, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Alert, Button, Card, Form, ListGroup, ListGroupItem } from "react-bootstrap";
+import { Alert, Button, Card, Form, ListGroup, ListGroupItem, Table } from "react-bootstrap";
 
 
 const Dashboard = () => {
@@ -62,7 +62,7 @@ const Dashboard = () => {
         if (resultado.token) {
             console.log("APIKEY--------->", resultado.token);
 
-            dispatch({ type: 'AGREGAR_VENTA', payload: resultado.token});
+            dispatch({ type: 'AGREGAR_VENTA', payload: resultado.token });
             setError('');
 
         }
@@ -82,7 +82,7 @@ const Dashboard = () => {
     const cargarPaquetes = async () => {
 
         //const response = await fetch("https://destinos.develotion.com//ventas.php?idVendedor=4")
-        
+
         const idPaquete = paqueteRef.current.value;
 
         const response = await fetch('https://destinos.develotion.com/paquetes.php', {
@@ -91,7 +91,7 @@ const Dashboard = () => {
                 Accept: 'application/json',
                 'apikey': token.apikey,
                 'Content-Type': 'application/json'
-                
+
             }
         });
 
@@ -143,10 +143,12 @@ const Dashboard = () => {
 
             </Form>
         </section>
+
+        {/* 3.2 */}
         <section>
             <h2>Listado de Paquetes</h2>
 
-            <Card style={{ width: '18rem' }}>
+            <Card style={{ width: '18rem' }} className="card">
                 <Card.Img variant="top" src="holder.js/100px180" />
                 <Card.Body>
                     <Card.Title>Paquete</Card.Title>
@@ -162,7 +164,7 @@ const Dashboard = () => {
             {/*             
             {ventas.map((venta) =>
 
-                <Card style={{ width: '18rem' }}>
+                <Card style={{ width: '18rem' }} className="card">
                     <Card.Img variant="top" src="holder.js/100px180" />
                     <Card.Body>
                         <Card.Title> Paquete {venta.idPaquete}</Card.Title>
@@ -186,11 +188,69 @@ const Dashboard = () => {
 
 
         </section>
+
+        {/* 3.3 */}
         <section>
             <h2>Cantidad de Ventas</h2>
+
+            <Table hover size="sm">
+                <thead>
+                    <tr>
+                        <th>Id Paquete</th>
+                        <th>Cantidad de Paquetes vendidos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </Table>
+
         </section>
+
+        {/* 3.4 */}
         <section>
             <h2>Personas por Destino</h2>
+            <Table hover size="sm">
+                <thead>
+                    <tr>
+                        <th>Id Destino</th>
+                        <th>Cantidad de Viajeros</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </Table>
         </section>
         <section>
             <h2>Gráfica de Precios por Destinos</h2>

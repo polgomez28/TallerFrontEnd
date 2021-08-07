@@ -3,9 +3,10 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './componentes/Header'
 import App from './App';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 import './index.css';
 
 import loginReducer from './redux/loginReducer';
