@@ -134,22 +134,30 @@ const Dashboard = () => {
             </Card>
 
             {/*             
-            {paquetes.map((ventas) =>
+            {ventas.map((venta) =>
 
                 <Card style={{ width: '18rem' }}>
                     <Card.Img variant="top" src="holder.js/100px180" />
                     <Card.Body>
-                        <Card.Title>{ventas.idPaquete}</Card.Title>
+                        <Card.Title>{venta.idPaquete}</Card.Title>
                         <ListGroup className="list-group-flush">
-                            <ListGroupItem> Cliente: {ventas.nombreCliente}</ListGroupItem>
-                            <ListGroupItem> {ventas.cantidadMayores} Adultos</ListGroupItem>
-                            <ListGroupItem> {ventas.cantidadMenores} Niños</ListGroupItem>
-                            <ListGroupItem> Precio Final: </ListGroupItem>
+                            <ListGroupItem> Cliente: {venta.nombreCliente}</ListGroupItem>
+                            <ListGroupItem> {venta.cantidadMayores} Adultos</ListGroupItem>
+                            <ListGroupItem> {venta.cantidadMenores} Niños</ListGroupItem>
+                            <ListGroupItem> Precio Final: {total} </ListGroupItem>
                         </ListGroup>
                     </Card.Body>
                 </Card>
 
             )}; */}
+
+            {/* const total =  totalMayores + totalMenores
+            
+                const totalMayores = {venta.cantidadMayores}*destino.precio_mayor
+                const totalMenores = {venta.cantidadMenores}*destino.precio_menor
+            */}
+
+
 
         </section>
         <section>
