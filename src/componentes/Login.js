@@ -1,8 +1,11 @@
 import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Alert, Button, Form } from "react-bootstrap";
+import { useHistory } from 'react-router-dom';
 
 const Login = () => {
+    const history = useHistory();
+
     const usuarioRef = useRef(null);
     const passwordRef = useRef(null);
     
@@ -49,6 +52,7 @@ const Login = () => {
         else{
             setError(resultado.mensaje);
         }
+        history.push('/Dashboard');
     }
 
     const registro = () => {
