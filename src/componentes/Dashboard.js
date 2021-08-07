@@ -13,6 +13,9 @@ const Dashboard = () => {
     const adultosRef = useRef(0);
     const menoresRef = useRef(0);
 
+    //const destinos = useSelector((state) => state.ventasReducer)
+    
+    
     const dispatch = useDispatch();
 
     const [error, setError] = useState('');
@@ -76,7 +79,7 @@ const Dashboard = () => {
     }, []);
 
     const cargarPaquetes = async () => {
-        const response = await fetch("https://destinos.develotion.com///ventas.php?idVendedor=4")
+        const response = await fetch("https://destinos.develotion.com//ventas.php?idVendedor=4")
 
         const ventas = await response.json();
 
@@ -94,12 +97,11 @@ const Dashboard = () => {
                     <Form.Select className="select" ref={paqueteRef}>
                         <option value="1">One</option>
                         <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        <option value="3">Three</option>  
 
-                        {/* {paquetes.map((destinos) => (
-                            <option value={destinos.id}> {destinos.nombre} </option>
-                        ))} */}
-
+                          {/* {destinos.map((destino) => (
+                            <option value={destino.id}> {destino.nombre} </option>
+                        ))}   */}
 
                     </Form.Select>
 
