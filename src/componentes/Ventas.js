@@ -1,4 +1,5 @@
 const Ventas = () => {
+    
     return (
         <form>
             <h2>Ventas </h2>

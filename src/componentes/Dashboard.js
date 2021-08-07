@@ -1,8 +1,8 @@
 import { useHistory } from "react-router-dom";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Alert, Button, Card, Form, ListGroup, ListGroupItem } from "react-bootstrap";
-import { useEffect } from "react";
+
 
 const Dashboard = () => {
 
@@ -17,11 +17,8 @@ const Dashboard = () => {
 
     const [error, setError] = useState('');
 
-
     const comprar = async () => {
         console.log("presionando Realizar compra")
-
-        // const token = useSelector((state) => state.authReducer)
 
         const nombreCliente = clienteRef.current.value;
         const idPaquete = paqueteRef.current.value;
@@ -67,16 +64,36 @@ const Dashboard = () => {
     }
 
     const paquetes = useSelector((state) => state.ventasReducer);
+
     useEffect(() => {
+        if (!token.length) {
+            history.push('/login');
+          }
         cargarPaquetes();
     }, []);
 
+    const token = useSelector((state) => state.authReducer);
     const cargarPaquetes = async () => {
-        const response = await fetch("https://destinos.develotion.com///ventas.php?idVendedor=4")
+        
+        var myHeaders = new Headers();
+            myHeaders.append(token);
+            myHeaders.append("Content-Type", "application/json");
 
-        const ventas = await response.json();
+        var urlencoded = new URLSearchParams();
 
-        dispatch({ type: 'CARGAR_VENTAS', payload: ventas.data })
+        var requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        body: urlencoded,
+        redirect: 'follow'
+        };
+
+        const response = await fetch("https://destinos.develotion.com/paquetes.php")
+        .then(response => response.json())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
+
+        console.log(response);
     }
 
     return (<div className="dashboard">
