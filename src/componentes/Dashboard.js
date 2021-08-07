@@ -13,7 +13,8 @@ const Dashboard = () => {
     
     const token = useSelector((state) => state.loginReducer);
 
-    //const destinos = useSelector((state) => state.ventasReducer)
+    /*defino destinos*/
+    const destinos = useSelector((state) => state.paquetesReducer) 
     
     
     const dispatch = useDispatch();
@@ -76,14 +77,10 @@ const Dashboard = () => {
         cargarPaquetes();
     }, []);
 
+
     const cargarPaquetes = async () => {
 
-        let destinos = [];
-        console.log("token antes de hacer fetch",token.apikey);
-
-        const response = await fetch("https://destinos.develotion.com//ventas.php?idVendedor=4")
-
-
+        //const response = await fetch("https://destinos.develotion.com//ventas.php?idVendedor=4")
 
         const response = await fetch('https://destinos.develotion.com/paquetes.php', {
             method: 'GET',
@@ -93,20 +90,21 @@ const Dashboard = () => {
             'Content-Type': 'application/json'
             }
         });
-        destinos = response.destinos;
-        console.log("R====>",destinos);
+        // destinos = response.destinos;
+        // console.log("R====>",destinos);
 
         if (response.error) {
             setError('Ocurrió un error');
             return;
           }
       
-          dispatch({ type: 'CARGAR_PAQUETES', payload: destinos }); 
-          console.log("destinos al state ---->",destinos);
+          dispatch({ type: 'CARGAR_PAQUETES', payload: response }); 
+          console.log("destinos al state ---->",response);
       
           setError('');
     
     }
+
     return (<div className="dashboard">
 
         <section>
@@ -116,13 +114,13 @@ const Dashboard = () => {
                     <Form.Control className="input" type="text" placeholder="Nombre Cliente" ref={clienteRef} required />
 
                     <Form.Select className="select" ref={paqueteRef}>
-                        <option value="1">One</option>
+                        {/* <option value="1">One</option>
                         <option value="2">Two</option>
-                        <option value="3">Three</option>  
+                        <option value="3">Three</option>   */}
 
-                          {/* {destinos.map((destino) => (
+                          {destinos.map((destino) => (
                             <option value={destino.id}> {destino.nombre} </option>
-                        ))}   */}
+                        ))}   
 
                     </Form.Select>
 
