@@ -1,10 +1,12 @@
-const initialState = { apikey: ''};
+const initialState = '';
 
 const authReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'OBTENER_PAQUETES':
-            return { ...state, apikey: action.payload };
+            return action.payload;
         default: 
         return state;
     }
 };
+
+export default authReducer;

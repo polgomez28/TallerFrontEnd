@@ -12,10 +12,14 @@ import ventasReducer from './redux/ventasReducer';
 
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
+import authReducer from './redux/authReducer';
+import paquetesReducer from './redux/paquetesReducer';
 
 const rootReducer = combineReducers({
     loginReducer: loginReducer,
     ventasReducer: ventasReducer,
+    authReducer: authReducer,
+    paquetesReducer: paquetesReducer
 });
   
   const store = createStore(
