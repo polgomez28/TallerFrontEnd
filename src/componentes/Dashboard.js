@@ -141,7 +141,7 @@ const Dashboard = () => {
                 <Card style={{ width: '18rem' }}>
                     <Card.Img variant="top" src="holder.js/100px180" />
                     <Card.Body>
-                        <Card.Title>{venta.idPaquete}</Card.Title>
+                        <Card.Title> Paquete {venta.idPaquete}</Card.Title>
                         <ListGroup className="list-group-flush">
                             <ListGroupItem> Cliente: {venta.nombreCliente}</ListGroupItem>
                             <ListGroupItem> {venta.cantidadMayores} Adultos</ListGroupItem>
