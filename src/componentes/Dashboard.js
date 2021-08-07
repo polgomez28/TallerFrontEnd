@@ -10,21 +10,17 @@ const Dashboard = () => {
     const paqueteRef = useRef(null);
     const adultosRef = useRef(0);
     const menoresRef = useRef(0);
-    
+
     const token = useSelector((state) => state.loginReducer);
 
-
-    const destinos = useSelector((state) => state.ventasReducer)
-
     /*defino destinos*/
-    const destinos = useSelector((state) => state.paquetesReducer) 
+    const destinos = useSelector((state) => state.paquetesReducer)
 
-    
-    
+
     const dispatch = useDispatch();
     const [error, setError] = useState('');
-    
-    
+
+
     const comprar = async () => {
         console.log("presionando Realizar compra")
 
@@ -37,7 +33,7 @@ const Dashboard = () => {
             setError('Debe completar todos los campos.');
             return;
         }
-        if (cantidadMayores + cantidadMenores > 10) {
+        if ((+cantidadMayores + +cantidadMenores) > 10) {
             setError('Los paquetes son para un máximo de 10 personas.');
             return;
         }
@@ -58,16 +54,17 @@ const Dashboard = () => {
             body: raw,
             redirect: 'follow'
         };
-        
+
         const response = await fetch("https://destinos.develotion.com/ventas.php", requestOptions)
 
         const resultado = await response.json();
 
         if (resultado.token) {
-            console.log("--------->", resultado);
+            console.log("APIKEY--------->", resultado.token);
 
-            dispatch({ type: 'AGREGAR_VENTA', payload: resultado.token });
+            dispatch({ type: 'AGREGAR_VENTA', payload: resultado.token});
             setError('');
+
         }
         else {
             setError(resultado.mensaje);
@@ -81,42 +78,35 @@ const Dashboard = () => {
         cargarPaquetes();
     }, []);
 
+
     const cargarPaquetes = async () => {
 
         //const response = await fetch("https://destinos.develotion.com//ventas.php?idVendedor=4")
-
+        
+        const idPaquete = paqueteRef.current.value;
 
         const response = await fetch('https://destinos.develotion.com/paquetes.php', {
             method: 'GET',
             headers: {
-            Accept: 'application/json',
-            'apikey': token.apikey,
-            'Content-Type': 'application/json'
+                Accept: 'application/json',
+                'apikey': token.apikey,
+                'Content-Type': 'application/json'
+                
             }
         });
-<<<<<<< HEAD
-        
+
         const destino = await response.json();
-=======
-
-
-
-        // destinos = response.destinos;
-        // console.log("R====>",destinos);
->>>>>>> cf2c2de757e17057fa27d9e5f00befcf94be7686
-
 
         if (response.error) {
             setError('Ocurrió un error');
             return;
-          }
-      
-          dispatch({ type: 'CARGAR_PAQUETES', payload: destino.destinos }); 
-          console.log("destinos al state ---->",destino.destinos);
-      
-          setError('');
-        console.log("hola");
-    
+        }
+
+        dispatch({ type: 'CARGAR_PAQUETES', payload: destino.destinos });
+        console.log("destinos al state ---->", destino.destinos);
+
+        setError('');
+
     }
 
     return (<div className="dashboard">
@@ -132,11 +122,9 @@ const Dashboard = () => {
                         <option value="2">Two</option>
                         <option value="3">Three</option>   */}
 
-
-
-                          {destinos.map((destino) => (
-                            <option value={destino.id}> {destino.nombre} </option>
-                        ))}   
+                        {destinos.map((destino) => (
+                            <option value={destino.id}> paq1 {destino.nombre} </option>
+                        ))}
 
 
                     </Form.Select>
@@ -147,7 +135,7 @@ const Dashboard = () => {
                 </Form.Group>
 
 
-                <Button variant="primary" className="btn">
+                <Button variant="primary" onClick={comprar} className="btn">
                     Realizar Compra
                 </Button>
 
