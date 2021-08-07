@@ -12,15 +12,9 @@ const Dashboard = () => {
     const menoresRef = useRef(0);
     
     const token = useSelector((state) => state.loginReducer);
-
-
-    const destinos = useSelector((state) => state.ventasReducer)
-
     /*defino destinos*/
     const destinos = useSelector((state) => state.paquetesReducer) 
 
-    
-    
     const dispatch = useDispatch();
     const [error, setError] = useState('');
     
@@ -92,6 +86,17 @@ const Dashboard = () => {
             }
         });
 
+        
+        const destino = await response.json();
+
+
+
+        // destinos = response.destinos;
+        // console.log("R====>",destinos);
+
+
+
+
         if (response.error) {
             setError('Ocurrió un error');
             return;
@@ -102,6 +107,8 @@ const Dashboard = () => {
               
           }
           console.log("destinos al state ---->",response);
+          dispatch({ type: 'CARGAR_PAQUETES', payload: destino.destinos }); 
+          console.log("destinos al state ---->",destino.destinos);
       
           setError('');
         console.log("hola");
