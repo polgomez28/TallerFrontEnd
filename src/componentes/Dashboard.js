@@ -13,8 +13,12 @@ const Dashboard = () => {
     
     const token = useSelector((state) => state.loginReducer);
 
+
+    const destinos = useSelector((state) => state.ventasReducer)
+
     /*defino destinos*/
     const destinos = useSelector((state) => state.paquetesReducer) 
+
     
     
     const dispatch = useDispatch();
@@ -77,10 +81,10 @@ const Dashboard = () => {
         cargarPaquetes();
     }, []);
 
-
     const cargarPaquetes = async () => {
 
         //const response = await fetch("https://destinos.develotion.com//ventas.php?idVendedor=4")
+
 
         const response = await fetch('https://destinos.develotion.com/paquetes.php', {
             method: 'GET',
@@ -90,8 +94,17 @@ const Dashboard = () => {
             'Content-Type': 'application/json'
             }
         });
+<<<<<<< HEAD
         
         const destino = await response.json();
+=======
+
+
+
+        // destinos = response.destinos;
+        // console.log("R====>",destinos);
+>>>>>>> cf2c2de757e17057fa27d9e5f00befcf94be7686
+
 
         if (response.error) {
             setError('Ocurrió un error');
@@ -102,6 +115,7 @@ const Dashboard = () => {
           console.log("destinos al state ---->",destino.destinos);
       
           setError('');
+        console.log("hola");
     
     }
 
@@ -118,9 +132,12 @@ const Dashboard = () => {
                         <option value="2">Two</option>
                         <option value="3">Three</option>   */}
 
+
+
                           {destinos.map((destino) => (
                             <option value={destino.id}> {destino.nombre} </option>
                         ))}   
+
 
                     </Form.Select>
 
@@ -130,7 +147,7 @@ const Dashboard = () => {
                 </Form.Group>
 
 
-                <Button variant="primary" onClick={comprar} className="btn">
+                <Button variant="primary" className="btn">
                     Realizar Compra
                 </Button>
 
