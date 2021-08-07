@@ -13,7 +13,7 @@ const Dashboard = () => {
     
     const token = useSelector((state) => state.loginReducer);
 
-    //const destinos = useSelector((state) => state.ventasReducer)
+    const destinos = useSelector((state) => state.ventasReducer)
     
     
     const dispatch = useDispatch();
@@ -78,13 +78,6 @@ const Dashboard = () => {
 
     const cargarPaquetes = async () => {
 
-        let destinos = [];
-        console.log("token antes de hacer fetch",token.apikey);
-
-        const response = await fetch("https://destinos.develotion.com//ventas.php?idVendedor=4")
-
-
-
         const response = await fetch('https://destinos.develotion.com/paquetes.php', {
             method: 'GET',
             headers: {
@@ -93,18 +86,18 @@ const Dashboard = () => {
             'Content-Type': 'application/json'
             }
         });
-        destinos = response.destinos;
-        console.log("R====>",destinos);
+
 
         if (response.error) {
             setError('Ocurrió un error');
             return;
           }
       
-          dispatch({ type: 'CARGAR_PAQUETES', payload: destinos }); 
-          console.log("destinos al state ---->",destinos);
+          dispatch({ type: 'CARGAR_PAQUETES', payload: response }); 
+          console.log("destinos al state ---->",response);
       
           setError('');
+        console.log("hola");
     
     }
     return (<div className="dashboard">
@@ -120,10 +113,6 @@ const Dashboard = () => {
                         <option value="2">Two</option>
                         <option value="3">Three</option>  
 
-                          {/* {destinos.map((destino) => (
-                            <option value={destino.id}> {destino.nombre} </option>
-                        ))}   */}
-
                     </Form.Select>
 
                     <Form.Control className="input" type="number" placeholder="Cantidad Adultos" ref={adultosRef} />
@@ -132,7 +121,7 @@ const Dashboard = () => {
                 </Form.Group>
 
 
-                <Button variant="primary" onClick={comprar} className="btn">
+                <Button variant="primary" className="btn">
                     Realizar Compra
                 </Button>
 

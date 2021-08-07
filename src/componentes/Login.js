@@ -43,8 +43,6 @@ const Login = () => {
 
         const resultado = await response.json();
 
-        console.log(resultado);
-
         if(resultado.apiKey){
             console.log("--------->", resultado);
 
