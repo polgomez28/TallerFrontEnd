@@ -13,7 +13,12 @@ const Dashboard = () => {
     
     const token = useSelector((state) => state.loginReducer);
 
+
     const destinos = useSelector((state) => state.ventasReducer)
+
+    /*defino destinos*/
+    const destinos = useSelector((state) => state.paquetesReducer) 
+
     
     
     const dispatch = useDispatch();
@@ -78,6 +83,9 @@ const Dashboard = () => {
 
     const cargarPaquetes = async () => {
 
+        //const response = await fetch("https://destinos.develotion.com//ventas.php?idVendedor=4")
+
+
         const response = await fetch('https://destinos.develotion.com/paquetes.php', {
             method: 'GET',
             headers: {
@@ -86,6 +94,11 @@ const Dashboard = () => {
             'Content-Type': 'application/json'
             }
         });
+
+
+
+        // destinos = response.destinos;
+        // console.log("R====>",destinos);
 
 
         if (response.error) {
@@ -100,6 +113,7 @@ const Dashboard = () => {
         console.log("hola");
     
     }
+
     return (<div className="dashboard">
 
         <section>
@@ -109,9 +123,16 @@ const Dashboard = () => {
                     <Form.Control className="input" type="text" placeholder="Nombre Cliente" ref={clienteRef} required />
 
                     <Form.Select className="select" ref={paqueteRef}>
-                        <option value="1">One</option>
+                        {/* <option value="1">One</option>
                         <option value="2">Two</option>
-                        <option value="3">Three</option>  
+                        <option value="3">Three</option>   */}
+
+
+
+                          {destinos.map((destino) => (
+                            <option value={destino.id}> {destino.nombre} </option>
+                        ))}   
+
 
                     </Form.Select>
 
@@ -151,7 +172,7 @@ const Dashboard = () => {
                 <Card style={{ width: '18rem' }}>
                     <Card.Img variant="top" src="holder.js/100px180" />
                     <Card.Body>
-                        <Card.Title>{venta.idPaquete}</Card.Title>
+                        <Card.Title> Paquete {venta.idPaquete}</Card.Title>
                         <ListGroup className="list-group-flush">
                             <ListGroupItem> Cliente: {venta.nombreCliente}</ListGroupItem>
                             <ListGroupItem> {venta.cantidadMayores} Adultos</ListGroupItem>
