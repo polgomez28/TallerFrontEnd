@@ -2,7 +2,7 @@ import { useHistory } from "react-router-dom";
 import { useRef, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Alert, Button, Card, Form, ListGroup, ListGroupItem, Table } from "react-bootstrap";
-
+import { Bar } from 'react-chartjs-2';
 
 const Dashboard = () => {
     const history = useHistory();
@@ -126,6 +126,33 @@ const Dashboard = () => {
       const datos = await response.json();
   
       dispatch({ type: 'AGREGAR_VENTA', payload: datos.data });
+    };
+
+    const GraficaPorPax = () => {
+        const ventas = useSelector((state) => state.ventasReducer);
+      
+        const destinosPorPax = {};
+      
+        ventas.forEach((venta) => {
+          const paquete = venta.id_paquete[1];
+      
+          destinosPorPax[paquete] = !destinosPorPax[paquete]
+            ? 1
+            : destinosPorPax[paquete] + 1;
+        });
+      
+        const data = {
+          labels: Object.keys(destinosPorPax),
+          datasets: [
+            {
+              label: 'Cantidad de Pasajeros por Destino',
+              data: Object.values(destinosPorPax),
+      
+              borderWidth: 1,
+            },
+          ],
+        };
+
     };
 
     return (<div className="dashboard">
@@ -270,7 +297,11 @@ const Dashboard = () => {
                     </tr>
                 </tbody>
             </Table>
+            <h2>Gráfico cantidad de Viajeros por Destino</h2>
+            {/* <Bar data={data} /> */}
+            {/* no encuentra data porque no esta definido en el return, por eso no debe mostrar los paquetes */}
         </section>
+
         <section>
             <h2>Gráfica de Precios por Destinos</h2>
         </section>
