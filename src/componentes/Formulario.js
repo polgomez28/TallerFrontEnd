@@ -11,6 +11,7 @@ const Formulario = () => {
     const dispatch = useDispatch();
     const [error, setError] = useState('');
     const token = useSelector((state) => state.loginReducer);
+    const idVendedor = useSelector((state) => state.loginReducer);
 
     const comprar = async () => {
         console.log("presionando Realizar compra")
@@ -29,36 +30,31 @@ const Formulario = () => {
             return;
         }
 
-        var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
+        const response = await fetch('https://destinos.develotion.com/ventas.php', {
+        method: 'POST',
+        headers: {
+        Accept: 'application/json',
+                'apikey': token.apikey,
+                'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        idVendedor: idVendedor,
+        nombreCliente: nombreCliente,
+        idPaquete: idPaquete,
+        cantidadMayores: cantidadMayores,
+        cantidadMenores: cantidadMenores,
+      }),
+    });
 
-        var raw = JSON.stringify({
-            nombreCliente: nombreCliente,
-            idPaquete: idPaquete,
-            cantidadMayores: cantidadMayores,
-            cantidadMenores: cantidadMenores,
-        });
+    const data = await response.json();
 
-        var requestOptions = {
-            method: 'POST',
-            headers: myHeaders,
-            body: raw,
-            redirect: 'follow'
-        };
-
-        const response = await fetch("https://destinos.develotion.com/ventas.php", requestOptions)
-
-        const resultado = await response.json();
-
-        if (resultado.token) {
-            console.log("APIKEY--------->", resultado.token);
-
-            dispatch({ type: 'AGREGAR_VENTA', payload: resultado.token });
+        if (data) {
+            dispatch({ type: 'AGREGAR_VENTA', payload: data });
             setError('');
 
         }
         else {
-            setError(resultado.mensaje);
+            setError(data.mensaje);
         }
 
     }
