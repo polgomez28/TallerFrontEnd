@@ -55,38 +55,71 @@ const Dashboard = () => {
         dispatch({ type: 'AGREGAR_VENTA', payload: datos.data });
 
         return (
-            /* 3.3 */
-            <section>
-                <h2>Cantidad de Ventas</h2>
+            <div>
+                {/* 3.3 */}
+                <section>
+                    <h2>Cantidad de Ventas</h2>
 
-                <Table hover size="sm">
-                    <thead>
-                        <tr>
-                            <th>Id Paquete</th>
-                            <th>Cantidad de Paquetes vendidos</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </Table>
+                    <Table hover size="sm">
+                        <thead>
+                            <tr>
+                                <th>Id Paquete</th>
+                                <th>Cantidad de Paquetes vendidos</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </Table>
+                </section>
 
-            </section>
+                {/* 3.4 */}
+                <section>
+                    <h2>Personas por Destino</h2>
+                    <Table hover size="sm">
+                        <thead>
+                            <tr>
+                                <th>Id Destino</th>
+                                <th>Cantidad de Viajeros</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </Table>
+                </section>
+
+            </div>
         );
     };
 
@@ -147,12 +180,18 @@ const Dashboard = () => {
         );
     };
 
-
+    const GraficaPreciosDestino = () => {
+        return (
+            <section>
+                <h2>Gráfica de Precios por Destinos</h2>
+            </section>
+        );
+    }
 
     return (<div className="dashboard">
 
+        {/*             
         <section>
-            {/*             
             {ventas.map((venta) =>
 
                 <Card style={{ width: '18rem' }} className="card">
@@ -170,48 +209,20 @@ const Dashboard = () => {
                 </Card>
 
             ))};
-            */}
 
 
         </section>
+            */}
 
         <ListarPaquetes />
         <Formulario />
         <cargarVentas></cargarVentas>
-        {/* 3.4 */}
-        <section>
-            <h2>Personas por Destino</h2>
-            <Table hover size="sm">
-                <thead>
-                    <tr>
-                        <th>Id Destino</th>
-                        <th>Cantidad de Viajeros</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </Table>
-        </section>
+        {/* cargar ventas retorna 3.3 y 3.4.  3.4 retorna tabla y GraficaPorPax*/}
+
         {/* <GraficaPorPax></GraficaPorPax> */}
-        <section>
-            <h2>Gráfica de Precios por Destinos</h2>
-        </section>
+
+        <GraficaPreciosDestino></GraficaPreciosDestino>
+
         <section >
 
             <h2>Destinos </h2>
