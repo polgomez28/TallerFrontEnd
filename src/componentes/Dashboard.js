@@ -3,89 +3,21 @@ import { useRef, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Alert, Button, Card, Form, ListGroup, ListGroupItem, Table } from "react-bootstrap";
 import { Bar } from 'react-chartjs-2';
+import Formulario from "./Formulario";
+
 
 const Dashboard = () => {
     const history = useHistory();
-    const clienteRef = useRef(null);
-    const paqueteRef = useRef(null);
-    const adultosRef = useRef(0);
-    const menoresRef = useRef(0);
-
-    
     const token = useSelector((state) => state.loginReducer);
     /*defino destinos*/
 
     /*defino destinos*/
     const destinos = useSelector((state) => state.paquetesReducer)
-
-
-
     const dispatch = useDispatch();
     const [error, setError] = useState('');
-
-
-    const comprar = async () => {
-        console.log("presionando Realizar compra")
-
-        const nombreCliente = clienteRef.current.value;
-        const idPaquete = paqueteRef.current.value;
-        const cantidadMayores = adultosRef.current.value;
-        const cantidadMenores = menoresRef.current.value;
-
-        if (nombreCliente.length === 0 || idPaquete.length === 0 || cantidadMayores.length === 0 || cantidadMenores.length === 0) {
-            setError('Debe completar todos los campos.');
-            return;
-        }
-        if ((+cantidadMayores + +cantidadMenores) > 10) {
-            setError('Los paquetes son para un máximo de 10 personas.');
-            return;
-        }
-
-        var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-
-        var raw = JSON.stringify({
-            nombreCliente: nombreCliente,
-            idPaquete: idPaquete,
-            cantidadMayores: cantidadMayores,
-            cantidadMenores: cantidadMenores,
-        });
-
-        var requestOptions = {
-            method: 'POST',
-            headers: myHeaders,
-            body: raw,
-            redirect: 'follow'
-        };
-
-        const response = await fetch("https://destinos.develotion.com/ventas.php", requestOptions)
-
-        const resultado = await response.json();
-
-        if (resultado.token) {
-            console.log("APIKEY--------->", resultado.token);
-
-            dispatch({ type: 'AGREGAR_VENTA', payload: resultado.token });
-            setError('');
-
-        }
-        else {
-            setError(resultado.mensaje);
-        }
-
-    }
-
     const paquetes = useSelector((state) => state.ventasReducer);
-    /*
-    useEffect(() => {
-        cargarPaquetes();
-    }, []);
-    */
-
+   
     const cargarPaquetes = async () => {
-
-        const idPaquete = paqueteRef.current.value;
-
 
         const response = await fetch('https://destinos.develotion.com/paquetes.php', {
             method: 'GET',
@@ -106,44 +38,20 @@ const Dashboard = () => {
 
         dispatch({ type: 'CARGAR_PAQUETES', payload: destino.destinos });
         console.log("destinos al state ---->", destino.destinos);
-
-
-        // destinos = response.destinos;
-        // console.log("R====>",destinos);
-
-
-
         setError('');
-
-
     }
 
-    //const dispatch = useDispatch();
-    //const token = useSelector((state) => state.authReducer.apikey);
     const ventas = useSelector((state) => state.ventasReducer);
-  
-    //const [error, setError] = useState('');
-  
+
     useEffect(() => {
-      
-
-        //   dispatch({ type: 'CARGAR_PAQUETES', payload: response }); 
-        //   if(response){
-              
-        //   }
-        //   console.log("destinos al state ---->",response);
-        //   dispatch({ type: 'CARGAR_PAQUETES', payload: destino.destinos }); 
-        //   console.log("destinos al state ---->",destino.destinos);
-
       cargarPaquetes();
-      cargarVentas();
+    //   cargarVentas();
     }, []);
   
     const cargarVentas = async () => {
 
       
       const response = await fetch('https://destinos.develotion.com/ventas.php?idVendedor={ventas.vendedor_id}')
-      //const response = await fetch("https://destinos.develotion.com/ventas.php?idVendedor=4")
       const datos = await response.json();
   
       dispatch({ type: 'AGREGAR_VENTA', payload: datos.data });
@@ -204,43 +112,7 @@ const Dashboard = () => {
 
     return (<div className="dashboard">
 
-        <section>
-            <h2>Venta de Paquetes</h2>
-            <Form>
-                <Form.Group >
-                    <Form.Control className="input" type="text" placeholder="Nombre Cliente" ref={clienteRef} required />
-
-                    <Form.Select className="select" ref={paqueteRef}>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-
-                        <option value="3">Three</option>  
-
-
-                        <option value="3">Three</option> 
-
-                        {/* {destinos.map((destino) => (
-                            <option value={destino.id}> paq1 {destino.nombre} </option>
-                        ))} */}
-
-
-
-                    </Form.Select>
-
-                    <Form.Control className="input" type="number" placeholder="Cantidad Adultos" ref={adultosRef} />
-                    <Form.Control className="input" type="number" placeholder="Cantidad Niños" ref={menoresRef} />
-
-                </Form.Group>
-
-
-                <Button variant="primary" onClick={comprar} className="btn">
-                    Realizar Compra
-                </Button>
-
-                {error && <Alert variant="danger">{error}</Alert>}
-
-            </Form>
-        </section>
+        
 
         <section>
            
@@ -301,6 +173,7 @@ const Dashboard = () => {
 
         </section>
 <ListarPaquetes/>
+<Formulario/>
         {/* 3.4 */}
         <section>
             <h2>Personas por Destino</h2>
