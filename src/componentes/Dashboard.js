@@ -73,15 +73,13 @@ const Dashboard = () => {
     }
 
     const paquetes = useSelector((state) => state.ventasReducer);
-
+    /*
     useEffect(() => {
         cargarPaquetes();
     }, []);
-
+    */
 
     const cargarPaquetes = async () => {
-
-        //const response = await fetch("https://destinos.develotion.com//ventas.php?idVendedor=4")
 
         const idPaquete = paqueteRef.current.value;
 
@@ -108,6 +106,27 @@ const Dashboard = () => {
         setError('');
 
     }
+
+    //const dispatch = useDispatch();
+    //const token = useSelector((state) => state.authReducer.apikey);
+    const ventas = useSelector((state) => state.ventasReducer);
+  
+    //const [error, setError] = useState('');
+  
+    useEffect(() => {
+      
+      cargarPaquetes();
+      cargarVentas();
+    }, []);
+  
+    const cargarVentas = async () => {
+      
+      const response = await fetch('https://destinos.develotion.com/ventas.php?idVendedor={ventas.vendedor_id}')
+      //const response = await fetch("https://destinos.develotion.com/ventas.php?idVendedor=4")
+      const datos = await response.json();
+  
+      dispatch({ type: 'AGREGAR_VENTA', payload: datos.data });
+    };
 
     return (<div className="dashboard">
 
