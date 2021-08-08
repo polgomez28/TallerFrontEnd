@@ -1,4 +1,4 @@
-const Ventas = () => {
+/*const Ventas = () => {
     
     return (
         <form>
@@ -15,4 +15,4 @@ const Ventas = () => {
     )
 }
 
-export default Ventas;
+export default Ventas;*/

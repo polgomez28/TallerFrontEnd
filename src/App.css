@@ -114,3 +114,7 @@ form{
   left: 10px; 
   padding: 10px;
 }
+
+.card{
+  border: solid 1px rgb(28, 114, 85);
+}
