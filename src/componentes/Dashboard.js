@@ -14,7 +14,7 @@ const Dashboard = () => {
     const token = useSelector((state) => state.loginReducer);
     /*defino destinos*/
     const destinos = useSelector((state) => state.paquetesReducer) 
-
+    
     const dispatch = useDispatch();
     const [error, setError] = useState('');
     
@@ -124,15 +124,10 @@ const Dashboard = () => {
                     <Form.Control className="input" type="text" placeholder="Nombre Cliente" ref={clienteRef} required />
 
                     <Form.Select className="select" ref={paqueteRef}>
-                        {/* <option value="1">One</option>
+                        <option value="1">One</option>
                         <option value="2">Two</option>
-                        <option value="3">Three</option>   */}
+                        <option value="3">Three</option>  
 
-
-
-                          {destinos.map((destino) => (
-                            <option value={destino.id}> {destino.nombre} </option>
-                        ))}   
 
 
                     </Form.Select>
@@ -151,46 +146,24 @@ const Dashboard = () => {
 
             </Form>
         </section>
+
+
+
         <section>
             <h2>Listado de Paquetes</h2>
-
-            <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src="holder.js/100px180" />
-                <Card.Body>
-                    <Card.Title>Paquete</Card.Title>
-                    <ListGroup className="list-group-flush">
-                        <ListGroupItem> Cliente: </ListGroupItem>
-                        <ListGroupItem>  Adultos</ListGroupItem>
-                        <ListGroupItem>  Niños</ListGroupItem>
-                        <ListGroupItem> Precio Final: </ListGroupItem>
-                    </ListGroup>
-                </Card.Body>
-            </Card>
-
-            {/*             
-            {ventas.map((venta) =>
+            {console.log("variable------>",destinos)};
+            
+            {destinos.map((i) => (
 
                 <Card style={{ width: '18rem' }}>
-                    <Card.Img variant="top" src="holder.js/100px180" />
-                    <Card.Body>
-                        <Card.Title> Paquete {venta.idPaquete}</Card.Title>
-                        <ListGroup className="list-group-flush">
-                            <ListGroupItem> Cliente: {venta.nombreCliente}</ListGroupItem>
-                            <ListGroupItem> {venta.cantidadMayores} Adultos</ListGroupItem>
-                            <ListGroupItem> {venta.cantidadMenores} Niños</ListGroupItem>
-                            <ListGroupItem> Precio Final: {total} </ListGroupItem>
-                        </ListGroup>
-                    </Card.Body>
+                <Card.Body>
+                    <Card.Title>{i.nombre}</Card.Title>
+                    <Card.Text>{i.precio_mayor}</Card.Text>
+                    <Card.Text>{i.precio_menor}</Card.Text>
+                </Card.Body>
                 </Card>
 
-            )}; */}
-
-            {/* const total =  totalMayores + totalMenores
-            
-                const totalMayores = {venta.cantidadMayores}*destino.precio_mayor
-                const totalMenores = {venta.cantidadMenores}*destino.precio_menor
-            */}
-
+            ))};
 
 
         </section>
