@@ -188,6 +188,24 @@ const Dashboard = () => {
         );
     }
 
+    const DestinosTop = () => {
+        return (
+            <section>
+                <h3>Destinos Top</h3>
+
+            </section>
+        )
+    }
+
+    const DestinosAPromocionar = () => {
+        return (
+            <section>
+                <h3>Destinos a Promocionar</h3>
+
+            </section>
+        )
+    }
+
     return (<div className="dashboard">
 
         {/*             
@@ -223,14 +241,12 @@ const Dashboard = () => {
 
         <GraficaPreciosDestino></GraficaPreciosDestino>
 
-        <section >
-
-            <h2>Destinos </h2>
-            <h3>Destinos Top</h3>
-            <h3>Destinos a Promocionar</h3>
 
 
-        </section>
+        <h2>Destinos </h2>
+        <DestinosTop></DestinosTop>
+        <DestinosAPromocionar></DestinosAPromocionar>
+
         <button className="btn" id="volver" onClick={() => history.goBack()}>Volver</button>
 
     </div>)
