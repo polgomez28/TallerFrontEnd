@@ -54,6 +54,44 @@ const Dashboard = () => {
 
         dispatch({ type: 'AGREGAR_VENTA', payload: datos.data });
 
+
+        // <section> 3.3
+        //             <h2>Cantidad de Ventas</h2>
+
+        //             <Table hover size="sm">
+        //                 <thead>
+        //                     <tr>
+        //                         <th>Id Paquete</th>
+        //                         <th>Cantidad de Paquetes vendidos</th>
+        //                     </tr>
+        //                 </thead>
+        //                 <tbody>
+        //                      {data.map((venta) => (
+                                //  const contador = contador + 1
+        //                      <tr><td>{venta.id_paquete}</td> <td>{contador}</td></tr>
+        //                       ))}
+        //                 </tbody>
+        //             </Table>
+        //     </section>
+
+        // <section> 3.4
+        //             <h2>Personas por Destino</h2>
+
+        //             <Table hover size="sm">
+        //                 <thead>
+        //                     <tr>
+        //                         <th>Id Paquete</th>
+        //                         <th>Cantidad de Paquetes vendidos</th>
+        //                     </tr>
+        //                 </thead>
+        //                 <tbody>
+        //                      {data.map((venta) => (
+        //                      <tr><td>{venta.id_paquete}</td> <td>{cantidad_mayores + cantidad_menores}</td></tr>
+        //                       ))}
+        //                 </tbody>
+        //             </Table>
+        //     </section>
+
         return (
             <div>
                 {/* 3.3 */}
