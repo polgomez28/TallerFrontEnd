@@ -1,5 +1,5 @@
 import { Form, Button, Alert } from 'react-bootstrap';
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const Formulario = () => {
@@ -43,14 +43,28 @@ const Formulario = () => {
         idPaquete: idPaquete,
         cantidadMayores: cantidadMayores,
         cantidadMenores: cantidadMenores,
-      }),
+      })
     });
 
     const data = await response.json();
 
         if (data) {
-            dispatch({ type: 'AGREGAR_VENTA', payload: data });
-            setError('');
+            console.log("Entre al if data, destinos tiene..", destinos);
+            const paqueteAFacturar = destinos.filter((dest) => dest.id == idPaquete);
+            console.log("Paquete filtrado....", paqueteAFacturar);
+            console.log("Precio mayor", paqueteAFacturar[0].precio_mayor);
+            const precioPaquete = {CostoTotal: (parseInt(paqueteAFacturar[0].precio_mayor) * cantidadMayores)+(parseInt(paqueteAFacturar[0].precio_menor) * cantidadMenores)};
+            console.log("precio del Paquete", precioPaquete);
+        
+                if (data.error) {
+                    setError('Ocurrió un error');
+                    return;
+                }
+                console.log("data antes del push ---->",data);
+                const ventaFinal = {idVenta: data.idVenta, Paquete: paqueteAFacturar[0].nombre, Adultos: cantidadMayores, Menores: cantidadMenores, CostoTotal: (parseInt(paqueteAFacturar[0].precio_mayor) * cantidadMayores)+(parseInt(paqueteAFacturar[0].precio_menor) * cantidadMenores)};
+                console.log("data luego del push ---->",ventaFinal);
+                dispatch({ type: 'AGREGAR_VENTA', payload: ventaFinal });
+                setError('');
 
         }
         else {
