@@ -7,7 +7,7 @@ const ListarPaquetes = () => {
     return (
         <section>
             <h2>Listado de Ventas</h2>
-
+            {console.log("ventas en ListarPaquetes",ventas)};
             {ventas.map((i) => (
                 <Card style={{ width: '18rem' }} className="card">
                     <Card.Body>
