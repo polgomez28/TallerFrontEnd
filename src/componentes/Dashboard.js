@@ -188,18 +188,31 @@ const Dashboard = () => {
         );
     }
 
-    const DestinosTop = () => {
-        return (
-            <section>
-                <h3>Destinos Top</h3>
+    // const DestinosTop = () => {
+    //     const vendidos = ventas.map((venta) => {
 
-            </section>
-        )
-    }
+    //         switch (venta.id_paquete) {
+    //             case 1:
+    //                 const contador1 = contador1 + 1;
+    //                 return (contador1 > 3 ? "COSTA MUJERES ALL INCLUSIVE - VERANO se vendió " + contador1 + " veces." : "");
+    //             case 2:
+    //                 const contador2 = contador2 + 1;
+    //                 return (contador2 > 3? "MADRID se vendió " + contador2 + " veces."  : "");
+    //             case 3:
+    //                 const contador3 = contador3 + 1;
+    //                 return (contador3 > 3 ? "PALMA DE MALLORCA ALL INCLUSIVE se vendió " + contador3 + " veces."  : "");
+    //             case 4:
+    //                 const contador4 = contador4 + 1;
+    //                 return (contador4 > 3 ? "San Andrés All Inclusive se vendió " + contador4 + " veces."  : "");
+    //             default:
+    //                 return "Ningún destino se vendió más de 3 veces.";
+    //         }
+    //     })
+    // }
 
     // const DestinosAPromocionar = () => {
     //     const noVendidos = ventas.map((venta) => {
-           
+
     //         switch (venta.id_paquete) {
     //             case 1 :
     //                 const contador1 = contador1 + 1;
@@ -258,7 +271,8 @@ const Dashboard = () => {
 
 
         <h2>Destinos </h2>
-        <DestinosTop></DestinosTop>
+        <h3>Destinos Top</h3>
+        {/* <DestinosTop></DestinosTop> */}
         <h3>Destinos a Promocionar</h3>
         {/* <DestinosAPromocionar></DestinosAPromocionar> */}
 
