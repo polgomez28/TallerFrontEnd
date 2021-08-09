@@ -1,6 +1,7 @@
 import { Form, Button, Alert } from 'react-bootstrap';
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import ListarPaquetes from "./ListarPaquetes";
 
 const Formulario = () => {
     const destinos = useSelector((state) => state.paquetesReducer);
@@ -10,6 +11,7 @@ const Formulario = () => {
     const menoresRef = useRef(0);
     const dispatch = useDispatch();
     const [error, setError] = useState('');
+    const [banderaVenta, setBanderaVenta] = useState('');
     const token = useSelector((state) => state.loginReducer);
     const idVendedor = useSelector((state) => state.loginReducer);
 
@@ -61,11 +63,11 @@ const Formulario = () => {
                     return;
                 }
                 console.log("data antes del push ---->",data);
-                const ventaFinal = {idVenta: data.idVenta, Paquete: paqueteAFacturar[0].nombre, Adultos: cantidadMayores, Menores: cantidadMenores, CostoTotal: (parseInt(paqueteAFacturar[0].precio_mayor) * cantidadMayores)+(parseInt(paqueteAFacturar[0].precio_menor) * cantidadMenores)};
+                const ventaFinal = {Cliente: nombreCliente, idVenta: data.idVenta, Paquete: paqueteAFacturar[0].nombre, Adultos: cantidadMayores, Menores: cantidadMenores, CostoTotal: (parseInt(paqueteAFacturar[0].precio_mayor) * cantidadMayores)+(parseInt(paqueteAFacturar[0].precio_menor) * cantidadMenores)};
                 console.log("data luego del push ---->",ventaFinal);
                 dispatch({ type: 'AGREGAR_VENTA', payload: ventaFinal });
                 setError('');
-
+                setBanderaVenta(true);
         }
         else {
             setError(data.mensaje);
@@ -76,6 +78,7 @@ const Formulario = () => {
     return(
         <section>
             <h2>Venta de Paquetes</h2>
+            
             <Form>
                 <Form.Group >
                     <Form.Control className="input" type="text" placeholder="Nombre Cliente" ref={clienteRef} required />
@@ -92,6 +95,7 @@ const Formulario = () => {
                 </Button>
                 {error && <Alert variant="danger">{error}</Alert>}
             </Form>
+            {banderaVenta ? <ListarPaquetes/> : <p>Sin ventas por le momento</p>}
         </section>
     );
 };

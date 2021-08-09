@@ -9,7 +9,7 @@ import Formulario from "./Formulario";
 const Dashboard = () => {
     const history = useHistory();
     const token = useSelector((state) => state.loginReducer);
-
+    
     /*defino destinos*/
     const destinos = useSelector((state) => state.paquetesReducer)
     const dispatch = useDispatch();
@@ -158,27 +158,30 @@ const Dashboard = () => {
 
     // ORDENANDO CODIGO HACIA ABAJO
 
-    const ListarPaquetes = () => {
-        const destinos = useSelector((state) => state.paquetesReducer)
+    // const ListarPaquetes = () => {
+    //     const ventas = useSelector((state) => state.ventasReducer)
 
-        return (
-            <section>
-                <h2>Listado de Paquetes</h2>
+    //     return (
+    //         <section>
+    //             <h2>Listado de Ventas</h2>
 
-                {destinos.map((i) => (
-                    <Card style={{ width: '18rem' }} className="card">
-                        <Card.Img variant="top" src="holder.js/100px180" />
+    //             {ventas.map((i) => (
+    //                 <Card style={{ width: '18rem' }} className="card">
+    //                     <Card.Img variant="top" src="holder.js/100px180" />
 
-                        <Card.Body>
-                            <Card.Title>{i.nombre}</Card.Title>
-                            <Card.Text>{i.precio_mayor}</Card.Text>
-                            <Card.Text>{i.precio_menor}</Card.Text>
-                        </Card.Body>
-                    </Card>
-                ))};
-            </section>
-        );
-    };
+    //                     <Card.Body>
+    //                         <Card.Title>Destino: {i.Paquete}</Card.Title>
+    //                         <Card.Text>IdVenta: {i.idVenta}</Card.Text>
+    //                         <Card.Text>Cliente: {i.Cliente}</Card.Text>
+    //                         <Card.Text>Adultos: {i.Adultos}</Card.Text>
+    //                         <Card.Text>Menores: {i.Menores}</Card.Text>
+    //                         <Card.Text>Costo total: {i.CostoTotal}</Card.Text>
+    //                     </Card.Body>
+    //                 </Card>
+    //             ))};
+    //         </section>
+    //     );
+    // };
 
     const GraficaPreciosDestino = () => {
         return (
@@ -232,8 +235,9 @@ const Dashboard = () => {
         </section>
             */}
 
-        <ListarPaquetes />
+        
         <Formulario />
+        
         <cargarVentas></cargarVentas>
         {/* cargar ventas retorna 3.3 y 3.4.  3.4 retorna tabla y GraficaPorPax*/}
 

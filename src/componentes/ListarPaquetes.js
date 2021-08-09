@@ -1,20 +1,27 @@
+import { useSelector } from "react-redux";
+import { Card } from "react-bootstrap";
 
+const ListarPaquetes = () => {
+    const ventas = useSelector((state) => state.ventasReducer)
 
-// <section>
-//             <h2>Listado de Paquetes</h2>
-//             {console.log("variable------>",destinos)};
-            
-//             {destinos.map((i) => (
+    return (
+        <section>
+            <h2>Listado de Ventas</h2>
 
-//                 <Card style={{ width: '18rem' }}>
-//                 <Card.Body>
-//                     <Card.Title>{i.nombre}</Card.Title>
-//                     <Card.Text>{i.precio_mayor}</Card.Text>
-//                     <Card.Text>{i.precio_menor}</Card.Text>
-//                 </Card.Body>
-//                 </Card>
+            {ventas.map((i) => (
+                <Card style={{ width: '18rem' }} className="card">
+                    <Card.Body>
+                        <Card.Title>Destino: {i.Paquete}</Card.Title>
+                        <Card.Text>IdVenta: {i.idVenta}</Card.Text>
+                        <Card.Text>Cliente: {i.Cliente}</Card.Text>
+                        <Card.Text>Adultos: {i.Adultos}</Card.Text>
+                        <Card.Text>Menores: {i.Menores}</Card.Text>
+                        <Card.Text>Costo total: {i.CostoTotal}</Card.Text>
+                    </Card.Body>
+                </Card>
+            ))};
+        </section>
+    );
+};
 
-//             ))};
-
-
-//         </section>
+export default ListarPaquetes;
