@@ -9,14 +9,13 @@ import Formulario from "./Formulario";
 const Dashboard = () => {
     const history = useHistory();
     const token = useSelector((state) => state.loginReducer);
-    /*defino destinos*/
 
     /*defino destinos*/
     const destinos = useSelector((state) => state.paquetesReducer)
     const dispatch = useDispatch();
     const [error, setError] = useState('');
     const paquetes = useSelector((state) => state.ventasReducer);
-   
+
     const cargarPaquetes = async () => {
 
         const response = await fetch('https://destinos.develotion.com/paquetes.php', {
@@ -44,80 +43,173 @@ const Dashboard = () => {
     const ventas = useSelector((state) => state.ventasReducer);
 
     useEffect(() => {
-      cargarPaquetes();
-    //   cargarVentas();
+        cargarPaquetes();
+        //   cargarVentas();
     }, []);
-  
+
     const cargarVentas = async () => {
 
-      
-      const response = await fetch('https://destinos.develotion.com/ventas.php?idVendedor={ventas.vendedor_id}')
-      const datos = await response.json();
-  
-      dispatch({ type: 'AGREGAR_VENTA', payload: datos.data });
+        const response = await fetch('https://destinos.develotion.com/ventas.php?idVendedor={ventas.vendedor_id}')
+        const datos = await response.json();
+
+        dispatch({ type: 'AGREGAR_VENTA', payload: datos.data });
+
+        return (
+            <div>
+                {/* 3.3 */}
+                <section>
+                    <h2>Cantidad de Ventas</h2>
+
+                    <Table hover size="sm">
+                        <thead>
+                            <tr>
+                                <th>Id Paquete</th>
+                                <th>Cantidad de Paquetes vendidos</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </Table>
+                </section>
+
+                {/* 3.4 */}
+                <section>
+                    <h2>Personas por Destino</h2>
+                    <Table hover size="sm">
+                        <thead>
+                            <tr>
+                                <th>Id Destino</th>
+                                <th>Cantidad de Viajeros</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </Table>
+                </section>
+
+            </div>
+        );
     };
 
-    const GraficaPorPax = () => {
-        const ventas = useSelector((state) => state.ventasReducer);
-      
-        const destinosPorPax = {};
-      
-        ventas.forEach((venta) => {
-          const paquete = venta.id_paquete[1];
-      
-          destinosPorPax[paquete] = !destinosPorPax[paquete]
-            ? 1
-            : destinosPorPax[paquete] + 1;
-        });
-      
-        const data = {
-          labels: Object.keys(destinosPorPax),
-          datasets: [
-            {
-              label: 'Cantidad de Pasajeros por Destino',
-              data: Object.values(destinosPorPax),
-      
-              borderWidth: 1,
-            },
-          ],
-        };
+    // const GraficaPorPax = () => {
+    //     const ventas = useSelector((state) => state.ventasReducer);
 
-    };
+    //     const destinosPorPax = {};
+
+    //     ventas.forEach((venta) => {
+    //         const paquete = venta.id_paquete[1];
+
+    //         destinosPorPax[paquete] = !destinosPorPax[paquete]
+    //             ? 1
+    //             : destinosPorPax[paquete] + 1;
+    //     });
+
+    //     const data = {
+    //         labels: Object.keys(destinosPorPax),
+    //         datasets: [
+    //             {
+    //                 label: 'Cantidad de Pasajeros por Destino',
+    //                 data: Object.values(destinosPorPax),
+
+    //                 borderWidth: 1,
+    //             },
+    //         ],
+    //     };
+
+    //     return (
+    //         <div>
+    //             <h2>Gráfico cantidad de Viajeros por Destino</h2>
+    //             <Bar data={data} />
+    //         </div>
+    //     );
+    // };
 
     // ORDENANDO CODIGO HACIA ABAJO
 
     const ListarPaquetes = () => {
         const destinos = useSelector((state) => state.paquetesReducer)
-    
-    return (
-    <section>
-     <h2>Listado de Paquetes</h2>
+
+        return (
+            <section>
+                <h2>Listado de Paquetes</h2>
 
                 {destinos.map((i) => (
-                <Card style={{ width: '18rem' }} className="card">
-                    <Card.Img variant="top" src="holder.js/100px180" />
-    
-                    <Card.Body>
-                        <Card.Title>{i.nombre}</Card.Title>
-                        <Card.Text>{i.precio_mayor}</Card.Text>
-                        <Card.Text>{i.precio_menor}</Card.Text>
-                    </Card.Body>
-                </Card>
+                    <Card style={{ width: '18rem' }} className="card">
+                        <Card.Img variant="top" src="holder.js/100px180" />
+
+                        <Card.Body>
+                            <Card.Title>{i.nombre}</Card.Title>
+                            <Card.Text>{i.precio_mayor}</Card.Text>
+                            <Card.Text>{i.precio_menor}</Card.Text>
+                        </Card.Body>
+                    </Card>
                 ))};
-    </section>
-    );
+            </section>
+        );
     };
 
+    const GraficaPreciosDestino = () => {
+        return (
+            <section>
+                <h2>Gráfica de Precios por Destinos</h2>
+            </section>
+        );
+    }
 
+    const DestinosTop = () => {
+        return (
+            <section>
+                <h3>Destinos Top</h3>
+
+            </section>
+        )
+    }
+
+    const DestinosAPromocionar = () => {
+        return (
+            <section>
+                <h3>Destinos a Promocionar</h3>
+
+            </section>
+        )
+    }
 
     return (<div className="dashboard">
 
-        
-
+        {/*             
         <section>
-           
-            
-            {/*             
             {ventas.map((venta) =>
 
                 <Card style={{ width: '18rem' }} className="card">
@@ -135,90 +227,26 @@ const Dashboard = () => {
                 </Card>
 
             ))};
+
+
+        </section>
             */}
 
+        <ListarPaquetes />
+        <Formulario />
+        <cargarVentas></cargarVentas>
+        {/* cargar ventas retorna 3.3 y 3.4.  3.4 retorna tabla y GraficaPorPax*/}
 
-        </section>
+        {/* <GraficaPorPax></GraficaPorPax> */}
 
-        {/* 3.3 */}
-        <section>
-            <h2>Cantidad de Ventas</h2>
-
-            <Table hover size="sm">
-                <thead>
-                    <tr>
-                        <th>Id Paquete</th>
-                        <th>Cantidad de Paquetes vendidos</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </Table>
-
-        </section>
-<ListarPaquetes/>
-<Formulario/>
-        {/* 3.4 */}
-        <section>
-            <h2>Personas por Destino</h2>
-            <Table hover size="sm">
-                <thead>
-                    <tr>
-                        <th>Id Destino</th>
-                        <th>Cantidad de Viajeros</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </Table>
-            <h2>Gráfico cantidad de Viajeros por Destino</h2>
-            {/* <Bar data={data} /> */}
-            {/* no encuentra data porque no esta definido en el return, por eso no debe mostrar los paquetes */}
-        </section>
-
-        <section>
-            <h2>Gráfica de Precios por Destinos</h2>
-        </section>
-        <section >
-
-            <h2>Destinos </h2>
-            <h3>Destinos Top</h3>
-            <h3>Destinos a Promocionar</h3>
+        <GraficaPreciosDestino></GraficaPreciosDestino>
 
 
-        </section>
+
+        <h2>Destinos </h2>
+        <DestinosTop></DestinosTop>
+        <DestinosAPromocionar></DestinosAPromocionar>
+
         <button className="btn" id="volver" onClick={() => history.goBack()}>Volver</button>
 
     </div>)
