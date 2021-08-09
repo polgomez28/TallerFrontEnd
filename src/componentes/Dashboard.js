@@ -197,14 +197,28 @@ const Dashboard = () => {
         )
     }
 
-    const DestinosAPromocionar = () => {
-        return (
-            <section>
-                <h3>Destinos a Promocionar</h3>
+    // const DestinosAPromocionar = () => {
+    //     const noVendidos = ventas.map((venta) => {
+           
+    //         switch (venta.id_paquete) {
+    //             case 1 :
+    //                 const contador1 = contador1 + 1;
+    //                 return (contador1===0 ? "COSTA MUJERES ALL INCLUSIVE - VERANO" : "");
+    //             case 2:
+    //                 const contador2 = contador2 + 1;
+    //                 return (contador2===0 ? "MADRID" : "");
+    //             case 3:
+    //                 const contador3 = contador3 + 1;
+    //                 return (contador3===0 ? "PALMA DE MALLORCA ALL INCLUSIVE" : "");
+    //             case 4:
+    //                 const contador4 = contador4 + 1;
+    //                 return (contador4===0 ?"San Andrés All Inclusive" : "");
+    //             default:
+    //                 return "No hay destino a promocionar. Todos los destinos fueron vendidos";
+    //         }
+    //     })
 
-            </section>
-        )
-    }
+    // }
 
     return (<div className="dashboard">
 
@@ -245,7 +259,8 @@ const Dashboard = () => {
 
         <h2>Destinos </h2>
         <DestinosTop></DestinosTop>
-        <DestinosAPromocionar></DestinosAPromocionar>
+        <h3>Destinos a Promocionar</h3>
+        {/* <DestinosAPromocionar></DestinosAPromocionar> */}
 
         <button className="btn" id="volver" onClick={() => history.goBack()}>Volver</button>
 
