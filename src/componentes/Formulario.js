@@ -13,6 +13,7 @@ const Formulario = () => {
     const [error, setError] = useState('');
     const [banderaVenta, setBanderaVenta] = useState('');
     const token = useSelector((state) => state.loginReducer);
+    const ventas = useSelector((state) => state.ventasReducer);
     const idVendedor = useSelector((state) => state.loginReducer);
 
     const comprar = async () => {
@@ -51,20 +52,13 @@ const Formulario = () => {
     const data = await response.json();
 
         if (data) {
-            console.log("Entre al if data, destinos tiene..", destinos);
             const paqueteAFacturar = destinos.filter((dest) => dest.id == idPaquete);
-            console.log("Paquete filtrado....", paqueteAFacturar);
-            console.log("Precio mayor", paqueteAFacturar[0].precio_mayor);
-            const precioPaquete = {CostoTotal: (parseInt(paqueteAFacturar[0].precio_mayor) * cantidadMayores)+(parseInt(paqueteAFacturar[0].precio_menor) * cantidadMenores)};
-            console.log("precio del Paquete", precioPaquete);
-        
                 if (data.error) {
                     setError('Ocurrió un error');
                     return;
                 }
-                console.log("data antes del push ---->",data);
+                
                 const ventaFinal = {Cliente: nombreCliente, idVenta: data.idVenta, Paquete: paqueteAFacturar[0].nombre, Adultos: cantidadMayores, Menores: cantidadMenores, CostoTotal: (parseInt(paqueteAFacturar[0].precio_mayor) * cantidadMayores)+(parseInt(paqueteAFacturar[0].precio_menor) * cantidadMenores)};
-                console.log("data luego del push ---->",ventaFinal);
                 dispatch({ type: 'AGREGAR_VENTA', payload: ventaFinal });
                 setError('');
                 setBanderaVenta(true);
