@@ -11,7 +11,7 @@ const ListarPaquetes = () => {
             {ventas.map((i) => (
                 <Card style={{ width: '18rem', display: "inline-block", margin: '2rem' }} className="card">
                     <Card.Body key={i.idVenta}>
-                        <Card.Title key={i.idVenta +1}>Destino: {i.Paquete}</Card.Title>
+                        <Card.Title key={i.idVenta +1}>{i.Paquete}</Card.Title>
                         <Card.Text key={i.idVenta + 1}>IdVenta: {i.idVenta}</Card.Text>
                         <Card.Text key={i.idVenta + 1}>Cliente: {i.Cliente}</Card.Text>
                         <Card.Text key={i.idVenta + 1}>Adultos: {i.Adultos}</Card.Text>

@@ -133,12 +133,11 @@ const Dashboard = () => {
             ],
 
         };
-
         return (
             <div>
                 <h2>Gráfico cantidad de Viajeros por Destino</h2>
                 <Bar data={data} />
-
+                {console.log(destinosPorPax)}
                 <Table hover size="sm">
                     <thead>
                         <tr>
@@ -147,10 +146,16 @@ const Dashboard = () => {
                         </tr>
                     </thead>
                     <tbody>
+<<<<<<< HEAD
                         {ventas.map((venta) => (
 
                             <tr><td>{venta.Paquete}</td> <td>{+venta.Adultos + +venta.Menores}</td></tr>
                         ))}
+=======
+                    {Object.keys(destinosPorPax).map(function(key) {
+                        return <tr><td>{key}</td><td>{destinosPorPax[key]}</td></tr>
+                    })}
+>>>>>>> ee4d119e76277176c595bf06b3372b0546927374
                     </tbody>
                 </Table>
 
@@ -158,6 +163,7 @@ const Dashboard = () => {
         );
     };
 
+<<<<<<< HEAD
     const DestinosAPromocionar = () => {
         const ventas = useSelector((state) => state.ventasReducer);
         const destinos = useSelector((state) => state.paquetesReducer);
@@ -182,6 +188,46 @@ const Dashboard = () => {
     }
 
 
+=======
+const ListarDestinosTop = () => {
+    const ventas = useSelector((state) => state.ventasReducer);
+
+        const destinosTop = {};
+        let contador = 0;
+        ventas.forEach((venta) => {
+            const paquete = venta.Paquete;
+
+            destinosTop[paquete] = !destinosTop[paquete]
+                ? +contador + +1
+                : destinosTop[paquete] + (+contador + +1);
+        });
+        console.log(destinosTop);
+        return(
+            <div>
+                <Table hover size="sm">
+                    <thead>
+                        <tr>
+                            <th>Paquete</th>
+                            <th>Cantidad de ventas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {Object.keys(destinosTop).map(function(key) {
+                        if(destinosTop[key] > 3){
+                            return <tr><td>{key}</td><td>{destinosTop[key]}</td></tr>
+                        }else{
+                            return <tr></tr>
+                        }
+                    })}
+                    </tbody>
+                </Table>
+            </div>
+        );
+
+
+}
+
+>>>>>>> ee4d119e76277176c595bf06b3372b0546927374
     return (<div className="dashboard">
 
         <Formulario />
@@ -192,6 +238,7 @@ const Dashboard = () => {
 
         <h2>Destinos </h2>
         <h3>Destinos Top</h3>
+        <ListarDestinosTop />
         {/* <DestinosTop></DestinosTop> */}
         <h3>Destinos a Promocionar</h3>
         <DestinosAPromocionar></DestinosAPromocionar>
