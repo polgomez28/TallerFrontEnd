@@ -120,6 +120,16 @@ const Dashboard = () => {
                 : destinosPorPax[paquete] + (+venta.Adultos + +venta.Menores);
             
         });
+// Tabla cantidad de ventas
+        const destinosTop = {};
+        let contador = 0;
+        ventas.forEach((venta) => {
+            const paquete = venta.Paquete;
+
+            destinosTop[paquete] = !destinosTop[paquete]
+                ? +contador + +1
+                : destinosTop[paquete] + (+contador + +1);
+        });
 
         const data = {
             labels: Object.keys(destinosPorPax),
@@ -146,16 +156,10 @@ const Dashboard = () => {
                         </tr>
                     </thead>
                     <tbody>
-<<<<<<< HEAD
-                        {ventas.map((venta) => (
-
-                            <tr><td>{venta.Paquete}</td> <td>{+venta.Adultos + +venta.Menores}</td></tr>
-                        ))}
-=======
-                    {Object.keys(destinosPorPax).map(function(key) {
-                        return <tr><td>{key}</td><td>{destinosPorPax[key]}</td></tr>
+                    {Object.keys(destinosTop).map(function(key) {
+                            return <tr><td>{key}</td><td>{destinosTop[key]}</td></tr>
                     })}
->>>>>>> ee4d119e76277176c595bf06b3372b0546927374
+
                     </tbody>
                 </Table>
 
@@ -163,7 +167,7 @@ const Dashboard = () => {
         );
     };
 
-<<<<<<< HEAD
+
     const DestinosAPromocionar = () => {
         const ventas = useSelector((state) => state.ventasReducer);
         const destinos = useSelector((state) => state.paquetesReducer);
@@ -176,8 +180,14 @@ const Dashboard = () => {
                 
                 {
                     destinos.forEach((destino) => {
-                        ventas.map((venta) => {
-                            <p>{destino.nombre !== venta.Paquete ? destino.nombre : ""} </p>
+                        ventas.forEach((venta) => {
+                            if(destino.nombre !== venta.Paquete)
+                            {
+                                <p>{venta.Paquete}</p>
+                                console.log("dentro del if",destino);
+                            }else{
+                                <p></p>
+                            }
                             {console.log("los destinos",destino.nombre)}
                             {console.log("los destinos de las ventas",venta.Paquete)}
                         })
@@ -188,7 +198,7 @@ const Dashboard = () => {
     }
 
 
-=======
+
 const ListarDestinosTop = () => {
     const ventas = useSelector((state) => state.ventasReducer);
 
@@ -227,7 +237,7 @@ const ListarDestinosTop = () => {
 
 }
 
->>>>>>> ee4d119e76277176c595bf06b3372b0546927374
+
     return (<div className="dashboard">
 
         <Formulario />
