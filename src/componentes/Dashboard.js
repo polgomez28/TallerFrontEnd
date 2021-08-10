@@ -80,11 +80,44 @@ const Dashboard = () => {
     };
 
     
+    const GraficaPorPax = () => {
+        const ventas = useSelector((state) => state.ventasReducer);
+
+        const destinosPorPax = {};
+
+        ventas.forEach((venta) => {
+            const paquete = venta.id_paquete;
+
+            destinosPorPax[paquete] = !destinosPorPax[paquete]
+                ? 1
+                : destinosPorPax[paquete] + 1;
+        });
+
+        const data = {
+            labels: Object.keys(destinosPorPax),
+            datasets: [
+                {
+                    label: 'Cantidad de Pasajeros por Destino',
+                    data: Object.values(destinosPorPax),
+
+                    borderWidth: 1,
+                },
+            ],
+        };
+
+        return (
+            <div>
+                <h2>Gráfico cantidad de Viajeros por Destino</h2>
+                <Bar data={data} />
+            </div>
+        );
+    };
+    
     return (<div className="dashboard">
         
         <Formulario />
         <LeerVentas/>
-        {/* <GraficaPorPax></GraficaPorPax> */}
+        <GraficaPorPax></GraficaPorPax>
 
         <GraficaPreciosDestino></GraficaPreciosDestino>
 
