@@ -17,11 +17,14 @@ import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import authReducer from './redux/authReducer';
 import paquetesReducer from './redux/paquetesReducer';
+import cantidadReduce from './redux/cantidadReduce';
+import Dashboard from './componentes/Dashboard';
 
 const rootReducer = combineReducers({
     loginReducer: loginReducer,
     ventasReducer: ventasReducer,
     authReducer: authReducer,
+    cantidadReduce: cantidadReduce,
     paquetesReducer: paquetesReducer
 });
   
@@ -40,8 +43,7 @@ ReactDOM.render(
       </Provider>
     </Router>
   </React.StrictMode>,
-  document.getElementById('root')
-);
+  document.getElementById('root'));
 
 
 // If you want to start measuring performance in your app, pass a function
