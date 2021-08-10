@@ -155,6 +155,44 @@ const Dashboard = () => {
         );
     };
 
+const ListarDestinosTop = () => {
+    const ventas = useSelector((state) => state.ventasReducer);
+
+        const destinosTop = {};
+        let contador = 0;
+        ventas.forEach((venta) => {
+            const paquete = venta.Paquete;
+
+            destinosTop[paquete] = !destinosTop[paquete]
+                ? +contador + +1
+                : destinosTop[paquete] + (+contador + +1);
+        });
+        console.log(destinosTop);
+        return(
+            <div>
+                <Table hover size="sm">
+                    <thead>
+                        <tr>
+                            <th>Paquete</th>
+                            <th>Cantidad de ventas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {Object.keys(destinosTop).map(function(key) {
+                        if(destinosTop[key] > 3){
+                            return <tr><td>{key}</td><td>{destinosTop[key]}</td></tr>
+                        }else{
+                            return <tr></tr>
+                        }
+                    })}
+                    </tbody>
+                </Table>
+            </div>
+        );
+
+
+}
+
     return (<div className="dashboard">
 
         <Formulario />
@@ -165,6 +203,7 @@ const Dashboard = () => {
 
         <h2>Destinos </h2>
         <h3>Destinos Top</h3>
+        <ListarDestinosTop />
         {/* <DestinosTop></DestinosTop> */}
         <h3>Destinos a Promocionar</h3>
         {/* <DestinosAPromocionar></DestinosAPromocionar> */}
