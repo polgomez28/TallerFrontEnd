@@ -9,7 +9,7 @@ const ListarPaquetes = () => {
             <h2>Listado de Ventas</h2>
             
             {ventas.map((i) => (
-                <Card style={{ width: '18rem', display: "inline-block" }} className="card">
+                <Card style={{ width: '18rem', display: "inline-block", margin: '2rem' }} className="card">
                     <Card.Body key={i.idVenta}>
                         <Card.Title key={i.idVenta +1}>Destino: {i.Paquete}</Card.Title>
                         <Card.Text key={i.idVenta + 1}>IdVenta: {i.idVenta}</Card.Text>
