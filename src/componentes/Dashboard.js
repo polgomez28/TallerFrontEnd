@@ -72,9 +72,36 @@ const Dashboard = () => {
 
 
     const GraficaPreciosDestino = () => {
+        const ventas = useSelector((state) => state.ventasReducer);
+
+        const destinosPorPax = {};
+
+        ventas.forEach((venta) => {
+            const paquete = venta.Paquete;
+            const cantidad = leerVentas.length;
+
+            destinosPorPax[paquete] = !destinosPorPax[paquete]
+                ? +venta.CostoTotal /(+venta.Adultos + +venta.Menores)
+                : ((destinosPorPax[paquete] + +venta.CostoTotal /(+venta.Adultos + +venta.Menores))/cantidad);
+        });
+
+        const data = {
+            labels: Object.keys(destinosPorPax),
+            datasets: [
+                {
+                    label: 'Cantidad de Pasajeros por Destino',
+                    data: Object.values(destinosPorPax),
+
+                    borderWidth: 1,
+                },
+            ],
+
+        };
+
         return (
             <section>
                 <h2>Gráfica de Precios por Destinos</h2>
+                <Bar data={data} />
             </section>
         );
     };
@@ -87,10 +114,6 @@ const Dashboard = () => {
 
         ventas.forEach((venta) => {
             const paquete = venta.Paquete;
-
-            console.log("1***********paquete", paquete)
-            console.log("ventas***********", ventas)
-            console.log("venta.Adultos***********", venta.Adultos)
 
             destinosPorPax[paquete] = !destinosPorPax[paquete]
                 ? +venta.Adultos + +venta.Menores
