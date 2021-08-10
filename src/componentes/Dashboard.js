@@ -10,7 +10,7 @@ const Dashboard = () => {
     const history = useHistory();
     const usuario = useSelector((state) => state.loginReducer);
     const leerVentas = useSelector((state) => state.ventasReducer);
-    
+
     /*defino destinos*/
     const destinos = useSelector((state) => state.paquetesReducer)
     const dispatch = useDispatch();
@@ -38,17 +38,17 @@ const Dashboard = () => {
     const cargarDatos = async () => {
         const venta = await traerVentas();
         const paquete = await cargarPaquetes();
-        console.log("venta en cargar datos",venta);
-        console.log("paquete en cargar datos",paquete);
+        console.log("venta en cargar datos", venta);
+        console.log("paquete en cargar datos", paquete);
         dispatch({ type: 'CARGAR_PAQUETES', payload: paquete.destinos });
-        if(venta.length)  {
+        if (venta.length) {
             dispatch({ type: 'AGREGAR_CANTIDAD', payload: venta.ventas });
         }
     };
     const LeerVentas = () => {
         const cantidad = leerVentas.length;
 
-        return(
+        return (
             <div>
                 <h1>{cantidad}</h1>
             </div>
@@ -64,10 +64,10 @@ const Dashboard = () => {
                 'Content-Type': 'application/json'
             }
         });
-        
+
         return response.json()
     };
-    
+
     // ORDENANDO CODIGO HACIA ABAJO
 
 
@@ -79,7 +79,7 @@ const Dashboard = () => {
         );
     };
 
-    
+
     const GraficaPorPax = () => {
         const ventas = useSelector((state) => state.ventasReducer);
 
@@ -87,7 +87,7 @@ const Dashboard = () => {
 
         ventas.forEach((venta) => {
             const paquete = venta.Paquete;
-            
+
             console.log("1***********paquete", paquete)
             console.log("ventas***********", ventas)
             console.log("venta.Adultos***********", venta.Adultos)
@@ -96,7 +96,7 @@ const Dashboard = () => {
                 ? +venta.Adultos + +venta.Menores
                 : destinosPorPax[paquete] + (+venta.Adultos + +venta.Menores);
         });
-        
+
         const data = {
             labels: Object.keys(destinosPorPax),
             datasets: [
@@ -107,21 +107,37 @@ const Dashboard = () => {
                     borderWidth: 1,
                 },
             ],
-           
+
         };
 
         return (
             <div>
                 <h2>Gráfico cantidad de Viajeros por Destino</h2>
                 <Bar data={data} />
+
+                <Table hover size="sm">
+                    <thead>
+                        <tr>
+                            <th>Paquete</th>
+                            <th>Cantidad de Paquetes vendidos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {ventas.map((venta) => (
+                            
+                            <tr><td>{venta.Paquete}</td> <td>{+venta.Adultos + +venta.Menores}</td></tr>
+                        ))}
+                    </tbody>
+                </Table>
+
             </div>
         );
     };
-    
+
     return (<div className="dashboard">
-        
+
         <Formulario />
-        <LeerVentas/>
+        <LeerVentas />
         <GraficaPorPax></GraficaPorPax>
 
         <GraficaPreciosDestino></GraficaPreciosDestino>
