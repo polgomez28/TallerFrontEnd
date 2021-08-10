@@ -89,7 +89,7 @@ const Dashboard = () => {
             labels: Object.keys(destinosPorPax),
             datasets: [
                 {
-                    label: 'Cantidad de Pasajeros por Destino',
+                    label: 'Promedio de Precio de cada paquete',
                     data: Object.values(destinosPorPax),
 
                     borderWidth: 1,
