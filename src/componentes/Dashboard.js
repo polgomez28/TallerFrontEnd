@@ -86,13 +86,17 @@ const Dashboard = () => {
         const destinosPorPax = {};
 
         ventas.forEach((venta) => {
-            const paquete = venta.id_paquete;
+            const paquete = venta.Paquete;
+            
+            console.log("1***********paquete", paquete)
+            console.log("ventas***********", ventas)
+            console.log("venta.Adultos***********", venta.Adultos)
 
             destinosPorPax[paquete] = !destinosPorPax[paquete]
-                ? 1
-                : destinosPorPax[paquete] + 1;
+                ? +venta.Adultos + +venta.Menores
+                : destinosPorPax[paquete] + (+venta.Adultos + +venta.Menores);
         });
-
+        
         const data = {
             labels: Object.keys(destinosPorPax),
             datasets: [
@@ -103,6 +107,7 @@ const Dashboard = () => {
                     borderWidth: 1,
                 },
             ],
+           
         };
 
         return (
