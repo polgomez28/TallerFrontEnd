@@ -109,12 +109,11 @@ const Dashboard = () => {
             ],
 
         };
-
         return (
             <div>
                 <h2>Gráfico cantidad de Viajeros por Destino</h2>
                 <Bar data={data} />
-
+                {console.log(destinosPorPax)}
                 <Table hover size="sm">
                     <thead>
                         <tr>
@@ -123,10 +122,9 @@ const Dashboard = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {ventas.map((venta) => (
-                            
-                            <tr><td>{venta.Paquete}</td> <td>{+venta.Adultos + +venta.Menores}</td></tr>
-                        ))}
+                    {Object.keys(destinosPorPax).map(function(key) {
+                        return <tr><td>{key}</td><td>{destinosPorPax[key]}</td></tr>
+                    })}
                     </tbody>
                 </Table>
 
