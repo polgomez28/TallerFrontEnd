@@ -17,8 +17,6 @@ const Formulario = () => {
     const idVendedor = useSelector((state) => state.loginReducer);
 
     const comprar = async () => {
-        console.log("presionando Realizar compra")
-
         const nombreCliente = clienteRef.current.value;
         const idPaquete = paqueteRef.current.value;
         const cantidadMayores = adultosRef.current.value;

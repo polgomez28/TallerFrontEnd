@@ -38,8 +38,6 @@ const Dashboard = () => {
     const cargarDatos = async () => {
         const venta = await traerVentas();
         const paquete = await cargarPaquetes();
-        console.log("venta en cargar datos", venta);
-        console.log("paquete en cargar datos", paquete);
         dispatch({ type: 'CARGAR_PAQUETES', payload: paquete.destinos });
         if (venta.length) {
             dispatch({ type: 'AGREGAR_CANTIDAD', payload: venta.ventas });
@@ -109,7 +107,6 @@ const Dashboard = () => {
 
     const GraficaPorPax = () => {
         const ventas = useSelector((state) => state.ventasReducer);
-        console.log("ventas", ventas)
         const destinosPorPax = {};
  
         ventas.forEach((venta) => {
@@ -147,7 +144,6 @@ const Dashboard = () => {
             <div>
                 <h2>Gráfico cantidad de Viajeros por Destino</h2>
                 <Bar data={data} />
-                {console.log(destinosPorPax)}
                 <Table hover size="sm">
                     <thead>
                         <tr>
@@ -171,10 +167,6 @@ const Dashboard = () => {
     const DestinosAPromocionar = () => {
         const ventas = useSelector((state) => state.ventasReducer);
         const destinos = useSelector((state) => state.paquetesReducer);
-        console.log("ventas------->>", ventas);
-        console.log("destinos----->>", destinos);
-
-
         return (
             <div>       
                 
@@ -184,12 +176,9 @@ const Dashboard = () => {
                             if(destino.nombre !== venta.Paquete)
                             {
                                 <p>{venta.Paquete}</p>
-                                console.log("dentro del if",destino);
                             }else{
                                 <p></p>
                             }
-                            {console.log("los destinos",destino.nombre)}
-                            {console.log("los destinos de las ventas",venta.Paquete)}
                         })
                     })
                 } 
@@ -211,7 +200,6 @@ const ListarDestinosTop = () => {
                 ? +contador + +1
                 : destinosTop[paquete] + (+contador + +1);
         });
-        console.log(destinosTop);
         return(
             <div>
                 <Table hover size="sm">
@@ -249,7 +237,6 @@ const ListarDestinosTop = () => {
         <h2>Destinos </h2>
         <h3>Destinos Top</h3>
         <ListarDestinosTop />
-        {/* <DestinosTop></DestinosTop> */}
         <h3>Destinos a Promocionar</h3>
         <DestinosAPromocionar></DestinosAPromocionar>
 

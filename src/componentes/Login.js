@@ -14,7 +14,6 @@ const Login = () => {
     const [error, setError] = useState('');
 
     const login = async () => {
-        console.log("presionando Ingresar")
 
         const usuario = usuarioRef.current.value;
         const password = passwordRef.current.value;
@@ -44,8 +43,6 @@ const Login = () => {
         const resultado = await response.json();
 
         if(resultado.apiKey){
-            console.log("--------->", resultado);
-
             dispatch({type: 'LOGIN', payload: resultado.apiKey});
             setError('');
         }
