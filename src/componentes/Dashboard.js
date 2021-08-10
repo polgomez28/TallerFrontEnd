@@ -81,8 +81,8 @@ const Dashboard = () => {
             const cantidad = leerVentas.length;
 
             destinosPorPax[paquete] = !destinosPorPax[paquete]
-                ? +venta.CostoTotal /(+venta.Adultos + +venta.Menores)
-                : ((destinosPorPax[paquete] + +venta.CostoTotal /(+venta.Adultos + +venta.Menores))/cantidad);
+                ? +venta.CostoTotal / (+venta.Adultos + +venta.Menores)
+                : ((destinosPorPax[paquete] + +venta.CostoTotal / (+venta.Adultos + +venta.Menores)) / cantidad);
         });
 
         const data = {
@@ -109,15 +109,16 @@ const Dashboard = () => {
 
     const GraficaPorPax = () => {
         const ventas = useSelector((state) => state.ventasReducer);
-
+        console.log("ventas", ventas)
         const destinosPorPax = {};
-
+ 
         ventas.forEach((venta) => {
             const paquete = venta.Paquete;
 
             destinosPorPax[paquete] = !destinosPorPax[paquete]
                 ? +venta.Adultos + +venta.Menores
                 : destinosPorPax[paquete] + (+venta.Adultos + +venta.Menores);
+            
         });
 
         const data = {
@@ -147,7 +148,7 @@ const Dashboard = () => {
                     </thead>
                     <tbody>
                         {ventas.map((venta) => (
-                            
+
                             <tr><td>{venta.Paquete}</td> <td>{+venta.Adultos + +venta.Menores}</td></tr>
                         ))}
                     </tbody>
@@ -156,6 +157,30 @@ const Dashboard = () => {
             </div>
         );
     };
+
+    const DestinosAPromocionar = () => {
+        const ventas = useSelector((state) => state.ventasReducer);
+        const destinos = useSelector((state) => state.paquetesReducer);
+        console.log("ventas------->>", ventas);
+        console.log("destinos----->>", destinos);
+
+
+        return (
+            <div>       
+                
+                {
+                    destinos.forEach((destino) => {
+                        ventas.map((venta) => {
+                            <p>{destino.nombre !== venta.Paquete ? destino.nombre : ""} </p>
+                            {console.log("los destinos",destino.nombre)}
+                            {console.log("los destinos de las ventas",venta.Paquete)}
+                        })
+                    })
+                } 
+            </div>
+        );
+    }
+
 
     return (<div className="dashboard">
 
@@ -169,7 +194,7 @@ const Dashboard = () => {
         <h3>Destinos Top</h3>
         {/* <DestinosTop></DestinosTop> */}
         <h3>Destinos a Promocionar</h3>
-        {/* <DestinosAPromocionar></DestinosAPromocionar> */}
+        <DestinosAPromocionar></DestinosAPromocionar>
 
         <button className="btn" id="volver" onClick={() => history.goBack()}>Volver</button>
 
