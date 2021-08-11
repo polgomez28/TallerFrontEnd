@@ -167,26 +167,28 @@ const Dashboard = () => {
     const DestinosAPromocionar = () => {
         const ventas = useSelector((state) => state.ventasReducer);
         const destinos = useSelector((state) => state.paquetesReducer);
+        let result = [];
+
+        ventas.forEach((venta) =>{
+            result = destinos.filter(destino => destino.nombre !== venta.Paquete);
+        })
+        // Se podria enviar al state de querer, ya esta creado el reduce pero por el momento se utiliza la variable
+        // dispatch({ type: 'CARGAR_PROMOCION', payload: result }); 
         return (
             <div>       
-                
-                {
-                    destinos.forEach((destino) => {
-                        ventas.forEach((venta) => {
-                            if(destino.nombre !== venta.Paquete)
-                            {
-                                <p>{venta.Paquete}</p>
-                            }else{
-                                <p></p>
-                            }
-                        })
-                    })
-                } 
+               {result.map((i) => (
+                <Card style={{ width: '18rem', display: "inline-block", margin: '2rem' }} className="card">
+                    <Card.Body key={i.id}>
+                        <Card.Title>{i.nombre}</Card.Title>
+                        <Card.Text>Id: {i.id}</Card.Text>
+                        <Card.Text>Precio mayores: {i.precio_mayor}</Card.Text>
+                        <Card.Text>Precio menores: {i.precio_menor}</Card.Text>
+                    </Card.Body>
+                </Card>
+            ))}
             </div>
         );
     }
-
-
 
 const ListarDestinosTop = () => {
     const ventas = useSelector((state) => state.ventasReducer);
@@ -237,6 +239,7 @@ const ListarDestinosTop = () => {
         <h2>Destinos </h2>
         <h3>Destinos Top</h3>
         <ListarDestinosTop />
+        
         <h3>Destinos a Promocionar</h3>
         <DestinosAPromocionar></DestinosAPromocionar>
 

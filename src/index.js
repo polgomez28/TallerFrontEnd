@@ -18,6 +18,7 @@ import { Provider } from 'react-redux';
 import authReducer from './redux/authReducer';
 import paquetesReducer from './redux/paquetesReducer';
 import cantidadReduce from './redux/cantidadReduce';
+import promocionarReducer from './redux/promocionarReduce';
 import Dashboard from './componentes/Dashboard';
 
 const rootReducer = combineReducers({
@@ -25,7 +26,8 @@ const rootReducer = combineReducers({
     ventasReducer: ventasReducer,
     authReducer: authReducer,
     cantidadReduce: cantidadReduce,
-    paquetesReducer: paquetesReducer
+    paquetesReducer: paquetesReducer,
+    promocionarReducer: promocionarReducer
 });
   
   const store = createStore(
